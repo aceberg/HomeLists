@@ -1,9 +1,9 @@
-package db
+package github.com/aceberg/HomeLists/tree/main/src/db
 
 import (
 	"fmt"
 )
 
-func testDb() {
+func TestDb() {
 	fmt.Println("DB package")
 }

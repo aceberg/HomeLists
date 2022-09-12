@@ -1,3 +1,3 @@
-module github.com/aceberg/HomeLists/src/db
+module github.com/aceberg/HomeLists/tree/main/src/db
 
 go 1.19
