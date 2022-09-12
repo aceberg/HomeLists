@@ -1,4 +1,4 @@
-package github.com/aceberg/HomeLists/tree/main/src/db
+package database
 
 import (
 	"fmt"

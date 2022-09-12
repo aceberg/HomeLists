@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/aceberg/HomeLists/tree/main/src/db"
+	"github.com/aceberg/start-stop-tray-app/iconon"
 )
 
 func main() {
-	fmt.Println("Main")
-	db.TestDb()
+	fmt.Println(iconon.Data)
 }
