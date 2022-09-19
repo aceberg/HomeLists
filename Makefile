@@ -4,7 +4,8 @@ DUSER=aceberg
 mod:
 	cd src && \
 	rm go.mod || true && \
-	go mod init $(PKG_NAME) && \
+	rm go.sum || true && \
+	go mod init github.com/aceberg/HomeLists && \
 	go mod tidy
 
 run:
