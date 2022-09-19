@@ -9,9 +9,11 @@ import (
 )
 
 var TableList []Table
+var AppConfig Conf
 
-func Webgui (AppConfig Conf) {
+func Webgui (appConfig Conf) {
 
+	AppConfig = appConfig
 	TableList = db.SelectTableList(AppConfig.DbPath)
 
 	address := AppConfig.GuiIP + ":" + AppConfig.GuiPort
@@ -21,15 +23,6 @@ func Webgui (AppConfig Conf) {
 	log.Println("=================================== ")
 
 	http.HandleFunc("/", dashboard)
+	http.HandleFunc("/table/", table)
 	http.ListenAndServe(address, nil)
-
-	// fmt.Println("Webgui will be here")
-	// fmt.Println("Config:", AppConfig)
-
-	// http.HandleFunc("/", index)
-	// http.HandleFunc("/minus_count/", minus_count)
-	// http.HandleFunc("/new_line/", new_line)
-	// http.HandleFunc("/remove_line/", remove_line)
-	// http.HandleFunc("/update_db/", update_db)
-	// http.ListenAndServe(":8834", nil)
 }

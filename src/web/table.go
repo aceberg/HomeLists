@@ -1,0 +1,28 @@
+package web
+
+import (
+	"fmt"
+	"strings"
+	"net/http"
+	"html"
+	"html/template"
+	"github.com/aceberg/HomeLists/db"
+	. "github.com/aceberg/HomeLists/models"
+)
+
+func table(w http.ResponseWriter, r *http.Request) {
+	var itemList []Item
+	if r.Method == "GET" {
+		urlString := html.EscapeString(r.URL.Path)
+		tags := strings.Split(urlString, "/")
+		oneTag := tags[2]
+
+		fmt.Println("GET:", oneTag)
+		itemList = db.SelectOneTable(AppConfig.DbPath, oneTag)
+	} else {
+		itemList = []Item{}
+	}
+
+	tmpl, _ := template.ParseFiles("templates/table.html", "templates/header.html", "templates/footer.html")
+	tmpl.ExecuteTemplate(w, "table", itemList)
+}

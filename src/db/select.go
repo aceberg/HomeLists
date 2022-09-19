@@ -23,3 +23,20 @@ func SelectTableList(path string) ([]Table) {
 	fmt.Println("TABLES:", tableList)
 	return tableList
 }
+
+func SelectOneTable(path string, tableName string) ([]Item) {
+	rows := db_select(path, tableName)
+
+	itemList := []Item{}
+	for rows.Next() {
+		var oneItem Item
+		err := rows.Scan(&oneItem.Id, &oneItem.Date, &oneItem.Name, &oneItem.Color, &oneItem.Count, &oneItem.Place)
+		if err != nil {
+			log.Fatal("ERROR: SelectOneTable: ", err)
+		}
+		
+		itemList = append(itemList, oneItem)
+	}
+	fmt.Println("ITEMS:", itemList)
+	return itemList
+}
