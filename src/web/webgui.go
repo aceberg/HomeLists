@@ -8,8 +8,9 @@ import (
 	. "github.com/aceberg/HomeLists/models"
 )
 
-var TableList []Table
 var AppConfig Conf
+var TableList []Table
+var CurrentTable string
 
 func Webgui (appConfig Conf) {
 
@@ -23,6 +24,7 @@ func Webgui (appConfig Conf) {
 	log.Println("=================================== ")
 
 	http.HandleFunc("/", dashboard)
+	http.HandleFunc("/add_table/", add_table)
 	http.HandleFunc("/table/", table)
 	http.ListenAndServe(address, nil)
 }

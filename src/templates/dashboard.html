@@ -5,18 +5,36 @@
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/superhero/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <table class="table table-striped">
-        <tr>
-            <th>Name</th>
-            <th>Date</th>
-        </tr>
-        {{ range . }}
-        <tr>
-            <td><a href="table/{{ .Name }}">{{ .Name }}</a></td>
-            <td>{{ .Date }}</td>
-        </tr>
-        {{ end }}
-    </table>
+    <div class="container">
+        <br>
+        <form action="/add_table/" method="post">
+            <div class="input-group w-50 mx-auto">
+                <input name="name" type="text" class="form-control text-dark" placeholder="Name">
+                <button type="submit" class="btn btn-primary">New table</button>
+            </div>
+        </form>
+
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+            {{ range . }}
+            <tr>
+                <td><a href="table/{{ .Name }}">{{ .Name }}</a></td>
+                <td>{{ .Date }}</td>
+                <td>
+                    <!-- <form action="/edit_table/" method="post"> -->
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                    <!-- </form> -->
+                </td>
+            </tr>
+            {{ end }}
+        </table>
+    </div>
 
 {{ template "footer" }}
 {{ end }}

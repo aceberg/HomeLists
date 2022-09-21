@@ -18,6 +18,7 @@ func table(w http.ResponseWriter, r *http.Request) {
 		oneTag := tags[2]
 
 		fmt.Println("GET:", oneTag)
+		CurrentTable = oneTag
 		itemList = db.SelectOneTable(AppConfig.DbPath, oneTag)
 	} else {
 		itemList = []Item{}
