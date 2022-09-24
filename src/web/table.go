@@ -19,7 +19,7 @@ func table(w http.ResponseWriter, r *http.Request) {
 
 		fmt.Println("GET:", oneTag)
 		CurrentTable = oneTag
-		itemList = db.SelectOneTable(AppConfig.DbPath, oneTag)
+		itemList = db.SelectOneTable(AppConfig.DbPath, CurrentTable)
 	} else {
 		itemList = []Item{}
 	}

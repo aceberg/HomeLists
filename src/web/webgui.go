@@ -25,6 +25,8 @@ func Webgui (appConfig Conf) {
 
 	http.HandleFunc("/", dashboard)
 	http.HandleFunc("/add_table/", add_table)
+	http.HandleFunc("/new_line/", new_line)
 	http.HandleFunc("/table/", table)
+	http.HandleFunc("/update_line/", update_line)
 	http.ListenAndServe(address, nil)
 }

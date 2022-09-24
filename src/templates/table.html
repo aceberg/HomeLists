@@ -5,18 +5,55 @@
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/superhero/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <table class="table table-striped">
-        <tr>
-            <th>Name</th>
-            <th>Date</th>
-        </tr>
-        {{ range . }}
-        <tr>
-            <td><a href="table/{{ .Name }}">{{ .Name }}</a></td>
-            <td>{{ .Date }}</td>
-        </tr>
-        {{ end }}
-    </table>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-6">
+                {{ range . }}
+                {{ if eq .Place 0 }}
+                <form action="/update_line/" method="post">
+                  <div class="input-group">
+                      <input name="id" type="hidden" class="form-control" value="{{ .Id }}">
+                      <input name="date" type="date" style="max-width: 25%" class="form-control" value="{{ .Date }}">
+                      <input name="name" type="text" class="form-control text-dark" value="{{ .Name }}">
+                      <button type="submit" formaction="/minus_count/" formmethod="post" class="btn btn-outline-success" >- 1</button>
+                      <input name="count" type="number" style="max-width: 15%" class="form-control text-dark" value="{{ .Count }}">
+                      <button type="submit" class="btn btn-primary" >Ok</button>
+                      <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" >
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                  </div>
+                </form>
+                {{ end }}
+                {{ end }}
+                <form action="/new_line/" method="post">
+                  <button name="place" type="submit" class="btn btn-success" value="0">New</button>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                {{ range . }}
+                {{ if eq .Place 1 }}
+                <form action="/update_line/" method="post">
+                  <div class="input-group">
+                      <input name="id" type="hidden" class="form-control" value="{{ .Id }}">
+                      <input name="date" type="date" style="max-width: 25%" class="form-control" value="{{ .Date }}">
+                      <input name="name" type="text" class="form-control text-dark" value="{{ .Name }}">
+                      <button type="submit" formaction="/minus_count/" formmethod="post" class="btn btn-outline-success" >- 1</button>
+                      <input name="count" type="number" style="max-width: 15%" class="form-control text-dark" value="{{ .Count }}">
+                      <button type="submit" class="btn btn-primary" >Ok</button>
+                      <button type="submit" formaction="/remove_line/" formmethod="post" class="btn btn-outline-warning" >
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                  </div>
+                </form>
+                {{ end }}
+                {{ end }}
+                <form action="/new_line/" method="post">
+                  <button name="place" type="submit" class="btn btn-success" value="1">New</button>
+              </form>
+            </div>
+        </div>
+    </div>
+        
 
 {{ template "footer" }}
 {{ end }}
