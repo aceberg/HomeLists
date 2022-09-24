@@ -1,7 +1,7 @@
 package db
 
 import (
-	"fmt"
+	// "fmt"
 	"log"
 	// "database/sql"
 	. "github.com/aceberg/HomeLists/models"
@@ -20,7 +20,7 @@ func SelectTableList(path string) ([]Table) {
 		
 		tableList = append(tableList, oneItem)
 	}
-	fmt.Println("TABLES:", tableList)
+	// fmt.Println("TABLES:", tableList)
 	return tableList
 }
 
@@ -37,6 +37,6 @@ func SelectOneTable(path string, tableName string) ([]Item) {
 		
 		itemList = append(itemList, oneItem)
 	}
-	fmt.Println("ITEMS:", itemList)
+	// fmt.Println("ITEMS:", itemList)
 	return itemList
 }

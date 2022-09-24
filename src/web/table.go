@@ -1,7 +1,7 @@
 package web
 
 import (
-	"fmt"
+	// "fmt"
 	"strings"
 	"net/http"
 	"html"
@@ -17,7 +17,7 @@ func table(w http.ResponseWriter, r *http.Request) {
 		tags := strings.Split(urlString, "/")
 		oneTag := tags[2]
 
-		fmt.Println("GET:", oneTag)
+		// fmt.Println("GET:", oneTag)
 		CurrentTable = oneTag
 		itemList = db.SelectOneTable(AppConfig.DbPath, CurrentTable)
 	} else {
