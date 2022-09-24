@@ -12,6 +12,8 @@ import (
 
 func dashboard(w http.ResponseWriter, r *http.Request) {
 
+	CurrentTable = "fTBZ96"
+
 	tmpl, _ := template.ParseFiles("templates/dashboard.html", "templates/header.html", "templates/footer.html")
 	tmpl.ExecuteTemplate(w, "dashboard", TableList)
 }

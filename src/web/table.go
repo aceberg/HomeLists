@@ -15,10 +15,9 @@ func table(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		urlString := html.EscapeString(r.URL.Path)
 		tags := strings.Split(urlString, "/")
-		oneTag := tags[2]
 
-		// fmt.Println("GET:", oneTag)
-		CurrentTable = oneTag
+		CurrentTable = tags[2]
+		
 		itemList = db.SelectOneTable(AppConfig.DbPath, CurrentTable)
 	} else {
 		itemList = []Item{}

@@ -13,17 +13,16 @@
                 <form action="/update_line/" method="post">
                   <div class="input-group">
                       <button type="submit" class="btn btn-primary" hidden></button>
-                      <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" >{{ .Id }}</button>
+                      <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" >
+                        <i class="bi bi-pencil"></i>
+                      </button>
                       <input name="id" type="hidden" class="form-control" value="{{ .Id }}">
                       <input name="date" type="date" style="max-width: 25%" class="form-control" value="{{ .Date }}">
                       <input name="name" type="text" class="form-control text-dark" value="{{ .Name }}">
-                      <button type="submit" formaction="/minus_count/" formmethod="post" class="btn btn-outline-success" >- 1</button>
+                      <button name="minus" value="yes" type="submit" formaction="/update_line/" formmethod="post" class="btn btn-outline-success" >- 1</button>
                       <input name="count" type="number" style="max-width: 15%" class="form-control text-dark" value="{{ .Count }}">
                       <input name="place" type="hidden" class="form-control" value="{{ .Place }}">
                       <button type="submit" class="btn btn-primary" >Ok</button>
-                      <!-- <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" >
-                        <i class="bi bi-pencil"></i>
-                      </button> -->
                   </div>
                 </form>
                 {{ end }}
@@ -38,11 +37,13 @@
                 <form action="/update_line/" method="post">
                   <div class="input-group">
                       <button type="submit" class="btn btn-primary" hidden></button>
-                      <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" >{{ .Id }}</button>
+                      <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" >
+                        <i class="bi bi-pencil"></i>
+                      </button>
                       <input name="id" type="hidden" class="form-control" value="{{ .Id }}">
                       <input name="date" type="date" style="max-width: 25%" class="form-control" value="{{ .Date }}">
                       <input name="name" type="text" class="form-control text-dark" value="{{ .Name }}">
-                      <button type="submit" formaction="/minus_count/" formmethod="post" class="btn btn-outline-success" >- 1</button>
+                      <button name="minus" value="yes" type="submit" formaction="/update_line/" formmethod="post" class="btn btn-outline-success" >- 1</button>
                       <input name="count" type="number" style="max-width: 15%" class="form-control text-dark" value="{{ .Count }}">
                       <input name="place" type="hidden" class="form-control" value="{{ .Place }}">
                       <button type="submit" class="btn btn-primary" >Ok</button>
