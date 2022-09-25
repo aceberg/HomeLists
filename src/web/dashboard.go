@@ -11,11 +11,20 @@ import (
 )
 
 func dashboard(w http.ResponseWriter, r *http.Request) {
+	type GuiData struct {
+		Config Conf
+		List []Table
+	}
+	var guiData GuiData
+
+	guiData.Config = AppConfig
+	guiData.List = TableList
 
 	CurrentTable = "fTBZ96"
 
 	tmpl, _ := template.ParseFiles("templates/dashboard.html", "templates/header.html", "templates/footer.html")
-	tmpl.ExecuteTemplate(w, "dashboard", TableList)
+	tmpl.ExecuteTemplate(w, "header", guiData)
+	tmpl.ExecuteTemplate(w, "dashboard", guiData)
 }
 
 func add_table(w http.ResponseWriter, r *http.Request) {

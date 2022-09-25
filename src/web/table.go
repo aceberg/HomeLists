@@ -24,5 +24,6 @@ func table(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tmpl, _ := template.ParseFiles("templates/table.html", "templates/header.html", "templates/footer.html")
+	tmpl.ExecuteTemplate(w, "header", itemList)
 	tmpl.ExecuteTemplate(w, "table", itemList)
 }

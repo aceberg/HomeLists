@@ -1,9 +1,5 @@
 {{ define "dashboard" }}
 
-{{ template "header" }}
-    <!--Bootstrap theme-->
-    <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.0/dist/superhero/bootstrap.min.css" rel="stylesheet">
-</head>
 <body>
     <div class="container">
         <br>
@@ -20,7 +16,7 @@
                 <th>Date</th>
                 <th></th>
             </tr>
-            {{ range . }}
+            {{ range .List }}
             <tr>
                 <td><a href="table/{{ .Name }}">{{ .Name }}</a></td>
                 <td>{{ .Date }}</td>

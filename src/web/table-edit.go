@@ -15,5 +15,6 @@ func edit_line(w http.ResponseWriter, r *http.Request) {
 	item = OneItem
 
 	tmpl, _ := template.ParseFiles("templates/table-edit.html", "templates/header.html", "templates/footer.html")
+	tmpl.ExecuteTemplate(w, "header", item)
 	tmpl.ExecuteTemplate(w, "table-edit", item)
 }
