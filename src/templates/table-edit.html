@@ -6,9 +6,54 @@
 </head>
 <body>
     <div class="container mt-5">
-        <div class="row">
-          <p>{{ .Name }}</p>
-        </div>
+        <h3>Edit</h3>
+        <table class="table">
+            <tr>
+                <td><a href="javascript:history.back()">
+                    <button class="btn btn-primary">Back</button>
+                </a></td>
+                <td><form action="/del_line/" method="post">
+                    <input name="id" value="{{ .Id }}" type="hidden" class="form-control">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form></td>
+            </tr>
+            <form action="/update_line/" method="post">
+                    <tr>
+                        <td>ID</td>
+                        <td><input name="id" value="{{ .Id }}" type="text" class="form-control" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td><input name="date" value="{{ .Date }}" type="date" class="form-control text-dark" placeholder="Date"></td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td><input name="name" value="{{ .Name }}" type="text" class="form-control text-dark" placeholder="Name"></td>
+                    </tr>
+                    <tr>
+                        <td>Color</td>
+                        <td><input name="color" value="{{ .Color }}" type="text" class="form-control text-dark" placeholder="Color"></td>
+                    </tr>
+                    <tr>
+                        <td>Count</td>
+                        <td><input name="count" value="{{ .Count }}" type="number" class="form-control text-dark" placeholder="Count"></td>
+                    </tr>
+                    <tr>
+                        <td>Place</td>
+                        <td>
+                            <select name="place" class="form-select">
+                                <option selected>{{ .Place }}</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button type="submit" class="btn btn-primary">Save</button></td>
+                    </tr>
+            </form>
+        </table>
     </div>
         
 

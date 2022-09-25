@@ -11,6 +11,7 @@ import (
 var AppConfig Conf
 var TableList []Table
 var CurrentTable string
+var OneItem Item
 
 func Webgui (appConfig Conf) {
 
@@ -25,8 +26,8 @@ func Webgui (appConfig Conf) {
 
 	http.HandleFunc("/", dashboard)
 	http.HandleFunc("/add_table/", add_table)
+	http.HandleFunc("/del_line/", del_line)
 	http.HandleFunc("/edit_line/", edit_line)
-	// http.HandleFunc("/minus_count/", minus_count)
 	http.HandleFunc("/new_line/", new_line)
 	http.HandleFunc("/table/", table)
 	http.HandleFunc("/update_line/", update_line)
