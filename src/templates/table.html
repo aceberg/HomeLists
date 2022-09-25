@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-sm-6">
                 {{ range . }}
-                {{ if eq .Place 0 }}
+                {{ if eq .Place "Left" }}
                 <form action="/update_line/" method="post">
                   <div class="input-group">
                       <button type="submit" class="btn btn-primary" hidden></button>
@@ -29,12 +29,12 @@
                 {{ end }}
                 {{ end }}
                 <form action="/new_line/" method="post">
-                  <button name="place" type="submit" class="btn btn-success" value="0">New</button>
+                  <button name="place" type="submit" class="btn btn-success" value="Left">New</button>
                 </form>
             </div>
             <div class="col-sm-6">
                 {{ range . }}
-                {{ if eq .Place 1 }}
+                {{ if eq .Place "Right" }}
                 <form action="/update_line/" method="post">
                   <div class="input-group">
                       <button type="submit" class="btn btn-primary" hidden></button>
@@ -54,7 +54,7 @@
                 {{ end }}
                 {{ end }}
                 <form action="/new_line/" method="post">
-                  <button name="place" type="submit" class="btn btn-success" value="1">New</button>
+                  <button name="place" type="submit" class="btn btn-success" value="Right">New</button>
               </form>
             </div>
         </div>

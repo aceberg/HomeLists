@@ -15,7 +15,7 @@ func InsertTableList(path string, table Table) {
 
 func InsertOneTable(path string, table string, item Item) {
 	sqlStatement := `INSERT INTO "%s" (DATE, NAME, COLOR, COUNT, PLACE) 
-					 VALUES ('%s','%s','%s','%d','%d');`
+					 VALUES ('%s','%s','%s','%d','%s');`
   	sqlStatement = fmt.Sprintf(sqlStatement, table, item.Date, item.Name, item.Color, item.Count, item.Place)
 	db_exec(path, sqlStatement)
 }

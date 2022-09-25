@@ -6,6 +6,6 @@ type Item struct {
 	Name   string
 	Color  string
 	Count  uint16
-	Place  uint16
-	Table  string
+	Place  string
+	Order  uint16
 }

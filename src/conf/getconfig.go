@@ -5,13 +5,6 @@ import (
 	. "github.com/aceberg/HomeLists/models"
 )
 
-// type Conf struct {
-//     DbPath   string
-//     GuiIP	 string
-//     GuiPort  string
-//     Theme    string
-// }
-
 const configPath = "/data/homelists/config"
 
 func GetConfig() (config Conf) {

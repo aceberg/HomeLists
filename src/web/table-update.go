@@ -23,8 +23,8 @@ func del_line(w http.ResponseWriter, r *http.Request) {
 func new_line(w http.ResponseWriter, r *http.Request) {
 	var item Item
 
-	place, _ := strconv.Atoi(r.FormValue("place"))
-	item.Place = uint16(place)
+	// place, _ := strconv.Atoi(r.FormValue("place"))
+	item.Place = r.FormValue("place")
 
 	db.InsertOneTable(AppConfig.DbPath, CurrentTable, item)
   
@@ -39,7 +39,7 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 	item.Name = r.FormValue("name")
 	item.Color = r.FormValue("color")
 	countStr := r.FormValue("count")
-	placeStr := r.FormValue("place")
+	item.Place = r.FormValue("place")
 	minus := r.FormValue("minus")
 	edit := r.FormValue("edit")
   
@@ -48,7 +48,6 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 	} else {
 		id, _ := strconv.Atoi(idStr)
 		count, _ := strconv.Atoi(countStr)
-		place, _ := strconv.Atoi(placeStr)
 		
 		if minus == "yes" {
 			count = count - 1
@@ -59,7 +58,6 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 
 		item.Id = uint16(id)
 		item.Count = uint16(count)
-		item.Place = uint16(place)
 
 		if edit == "yes" {
 			OneItem = item
