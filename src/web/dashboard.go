@@ -11,20 +11,12 @@ import (
 )
 
 func dashboard(w http.ResponseWriter, r *http.Request) {
-	type GuiData struct {
-		Config Conf
-		List []Table
-	}
-	var guiData GuiData
 
-	guiData.Config = AppConfig
-	guiData.List = TableList
-
-	CurrentTable = "fTBZ96"
+	Data.CurrentTable = "fTBZ96"
 
 	tmpl, _ := template.ParseFiles("templates/dashboard.html", "templates/header.html", "templates/footer.html")
-	tmpl.ExecuteTemplate(w, "header", guiData)
-	tmpl.ExecuteTemplate(w, "dashboard", guiData)
+	tmpl.ExecuteTemplate(w, "header", Data)
+	tmpl.ExecuteTemplate(w, "dashboard", Data)
 }
 
 func add_table(w http.ResponseWriter, r *http.Request) {
@@ -38,9 +30,9 @@ func add_table(w http.ResponseWriter, r *http.Request) {
 		newTable.Date = currentTime.Format("2006-01-02")
 		log.Println("INFO: Added table", newTable)
 
-		db.InsertTableList(AppConfig.DbPath, newTable)
-		db.CreateTable(AppConfig.DbPath, newTable.Name)
-		TableList = db.SelectTableList(AppConfig.DbPath)
+		db.InsertTableList(Data.Config.DbPath, newTable)
+		db.CreateTable(Data.Config.DbPath, newTable.Name)
+		Data.TableList = db.SelectTableList(Data.Config.DbPath)
 	}
 
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)

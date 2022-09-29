@@ -13,9 +13,9 @@ func del_line(w http.ResponseWriter, r *http.Request) {
 	idInt, _ := strconv.Atoi(r.FormValue("id"))
 	id := uint16(idInt)
 
-	db.DeleteItem(AppConfig.DbPath, CurrentTable, id)
+	db.DeleteItem(Data.Config.DbPath, Data.CurrentTable, id)
   
-	path := "/table/" + CurrentTable
+	path := "/table/" + Data.CurrentTable
 
 	http.Redirect(w, r, path, 302)
 }
@@ -23,10 +23,9 @@ func del_line(w http.ResponseWriter, r *http.Request) {
 func new_line(w http.ResponseWriter, r *http.Request) {
 	var item Item
 
-	// place, _ := strconv.Atoi(r.FormValue("place"))
 	item.Place = r.FormValue("place")
 
-	db.InsertOneTable(AppConfig.DbPath, CurrentTable, item)
+	db.InsertOneTable(Data.Config.DbPath, Data.CurrentTable, item)
   
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)
 }
@@ -60,13 +59,13 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 		item.Count = uint16(count)
 
 		if edit == "yes" {
-			OneItem = item
+			Data.OneItem = item
 			edit_line(w, r)
 
 		} else { 
-			db.UpdateOneTable(AppConfig.DbPath, CurrentTable, item)
+			db.UpdateOneTable(Data.Config.DbPath, Data.CurrentTable, item)
 	
-			path := "/table/" + CurrentTable
+			path := "/table/" + Data.CurrentTable
 
 			http.Redirect(w, r, path, 302)
 		}

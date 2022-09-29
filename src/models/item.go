@@ -7,5 +7,5 @@ type Item struct {
 	Color  string
 	Count  uint16
 	Place  string
-	Order  uint16
+	Sort   uint16
 }

@@ -30,7 +30,7 @@ func SelectOneTable(path string, tableName string) ([]Item) {
 	itemList := []Item{}
 	for rows.Next() {
 		var oneItem Item
-		err := rows.Scan(&oneItem.Id, &oneItem.Date, &oneItem.Name, &oneItem.Color, &oneItem.Count, &oneItem.Place)
+		err := rows.Scan(&oneItem.Id, &oneItem.Date, &oneItem.Name, &oneItem.Color, &oneItem.Count, &oneItem.Place, &oneItem.Sort)
 		if err != nil {
 			log.Fatal("ERROR: SelectOneTable: ", err)
 		}

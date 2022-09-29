@@ -9,40 +9,44 @@
                     <button class="btn btn-primary">Back</button>
                 </a></td>
                 <td><form action="/del_line/" method="post">
-                    <input name="id" value="{{ .Id }}" type="hidden" class="form-control">
+                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form></td>
             </tr>
             <form action="/update_line/" method="post">
                     <tr>
                         <td>ID</td>
-                        <td><input name="id" value="{{ .Id }}" type="text" class="form-control" readonly></td>
+                        <td><input name="id" value="{{ .OneItem.Id }}" type="text" class="form-control" readonly></td>
                     </tr>
                     <tr>
                         <td>Date</td>
-                        <td><input name="date" value="{{ .Date }}" type="date" class="form-control text-dark" placeholder="Date"></td>
+                        <td><input name="date" value="{{ .OneItem.Date }}" type="date" class="form-control text-dark" placeholder="Date"></td>
                     </tr>
                     <tr>
                         <td>Name</td>
-                        <td><input name="name" value="{{ .Name }}" type="text" class="form-control text-dark" placeholder="Name"></td>
+                        <td><input name="name" value="{{ .OneItem.Name }}" type="text" class="form-control text-dark" placeholder="Name"></td>
                     </tr>
                     <tr>
                         <td>Color</td>
-                        <td><input name="color" value="{{ .Color }}" type="text" class="form-control text-dark" placeholder="Color"></td>
+                        <td><input name="color" value="{{ .OneItem.Color }}" type="text" class="form-control text-dark" placeholder="Color"></td>
                     </tr>
                     <tr>
                         <td>Count</td>
-                        <td><input name="count" value="{{ .Count }}" type="number" class="form-control text-dark" placeholder="Count"></td>
+                        <td><input name="count" value="{{ .OneItem.Count }}" type="number" class="form-control text-dark" placeholder="Count"></td>
                     </tr>
                     <tr>
                         <td>Place</td>
                         <td>
                             <select name="place" class="form-select">
-                                <option selected>{{ .Place }}</option>
+                                <option selected>{{ .OneItem.Place }}</option>
                                 <option value="Left">Left</option>
                                 <option value="Right">Right</option>
                             </select>
                         </td>
+                    </tr>
+                    <tr>
+                        <td>Sort</td>
+                        <td><input name="sort" value="{{ .OneItem.Sort }}" type="number" class="form-control text-dark"></td>
                     </tr>
                     <tr>
                         <td></td>

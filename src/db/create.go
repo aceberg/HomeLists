@@ -27,7 +27,8 @@ func CreateTable(path string, tableName string) {
 		"NAME"	TEXT NOT NULL,
 		"COLOR"	TEXT NOT NULL,
 		"COUNT"	INTEGER DEFAULT 0,
-		"PLACE"	TEXT NOT NULL
+		"PLACE"	TEXT NOT NULL,
+		"SORT"	INTEGER DEFAULT 0
 	);`
 	sqlStatement = fmt.Sprintf(sqlStatement, tableName)
     db_exec(path, sqlStatement)

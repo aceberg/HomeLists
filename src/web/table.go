@@ -11,19 +11,18 @@ import (
 )
 
 func table(w http.ResponseWriter, r *http.Request) {
-	var itemList []Item
 	if r.Method == "GET" {
 		urlString := html.EscapeString(r.URL.Path)
 		tags := strings.Split(urlString, "/")
 
-		CurrentTable = tags[2]
+		Data.CurrentTable = tags[2]
 		
-		itemList = db.SelectOneTable(AppConfig.DbPath, CurrentTable)
+		Data.ItemList = db.SelectOneTable(Data.Config.DbPath, Data.CurrentTable)
 	} else {
-		itemList = []Item{}
+		Data.ItemList = []Item{}
 	}
 
 	tmpl, _ := template.ParseFiles("templates/table.html", "templates/header.html", "templates/footer.html")
-	tmpl.ExecuteTemplate(w, "header", itemList)
-	tmpl.ExecuteTemplate(w, "table", itemList)
+	tmpl.ExecuteTemplate(w, "header", Data)
+	tmpl.ExecuteTemplate(w, "table", Data)
 }
