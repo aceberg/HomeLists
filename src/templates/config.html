@@ -1,0 +1,19 @@
+{{ define "config" }}
+
+<body>
+    <div class="container mt-5">
+        <form action="/save_config/" method="post">
+            <p>Theme</p>
+            <select name="theme" class="form-select">
+            <option selected>{{ .Config.Theme }}</option>
+            {{ range .Themes }}
+                <option value="{{ . }}">{{ . }}</option>
+            {{ end }}
+            </select>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+        
+
+{{ template "footer" }}
+{{ end }}

@@ -12,7 +12,7 @@ import (
 
 func dashboard(w http.ResponseWriter, r *http.Request) {
 
-	Data.CurrentTable = "fTBZ96"
+	Data.CurrentTable = "Dashboard"
 
 	tmpl, _ := template.ParseFiles("templates/dashboard.html", "templates/header.html", "templates/footer.html")
 	tmpl.ExecuteTemplate(w, "header", Data)

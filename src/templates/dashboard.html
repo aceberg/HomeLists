@@ -15,17 +15,20 @@
                 <th>Name</th>
                 <th>Date</th>
                 <th></th>
+                <th></th>
             </tr>
             {{ range .TableList }}
             <tr>
                 <td><a href="table/{{ .Name }}">{{ .Name }}</a></td>
                 <td>{{ .Date }}</td>
                 <td>
-                    <!-- <form action="/edit_table/" method="post"> -->
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                    <!-- </form> -->
+                    <form action="/dashboard_rename/" method="post">
+                      <div class="input-group">
+                        <input name="id" type="hidden" class="form-control" value="{{ .Id }}">
+                        <input name="name" type="text" class="form-control text-dark" value="{{ .Name }}" style="max-width: 25%">
+                        <button type="submit" class="btn btn-primary">Rename</button>
+                      </div>
+                    </form>
                 </td>
             </tr>
             {{ end }}

@@ -6,4 +6,5 @@ type GuiData struct {
 	TableList 	 []Table
 	ItemList 	 []Item
 	OneItem		 Item
+	Themes 		 []string
 }
