@@ -23,6 +23,7 @@ func Webgui(appConfig Conf) {
 
 	http.HandleFunc("/", dashboard)
 	http.HandleFunc("/add_table/", add_table)
+	http.HandleFunc("/backup/", backup)
 	http.HandleFunc("/config/", config)
 	http.HandleFunc("/del_line/", del_line)
 	http.HandleFunc("/edit_line/", edit_line)
@@ -30,5 +31,6 @@ func Webgui(appConfig Conf) {
 	http.HandleFunc("/save_config/", save_config)
 	http.HandleFunc("/table/", table)
 	http.HandleFunc("/update_line/", update_line)
+	http.HandleFunc("/upload/", upload)
 	http.ListenAndServe(address, nil)
 }

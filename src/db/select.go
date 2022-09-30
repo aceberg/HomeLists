@@ -8,7 +8,7 @@ import (
 )
 
 func SelectTableList(path string) ([]Table) {
-	rows := db_select(path, "fTBZ96")
+	rows := db_select(path, MainTable)
 
 	tableList := []Table{}
 	for rows.Next() {

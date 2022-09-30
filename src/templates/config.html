@@ -2,16 +2,36 @@
 
 <body>
     <div class="container mt-5">
-        <form action="/save_config/" method="post">
-            <p>Theme</p>
-            <select name="theme" class="form-select">
-            <option selected>{{ .Config.Theme }}</option>
-            {{ range .Themes }}
-                <option value="{{ . }}">{{ . }}</option>
-            {{ end }}
-            </select>
-            <button type="submit" class="btn btn-primary">Save</button>
-        </form>
+        <div class="row">
+            <div class="col">
+                <form action="/save_config/" method="post">
+                    <h3>Theme</h3>
+                    <select name="theme" class="form-select">
+                    <option selected>{{ .Config.Theme }}</option>
+                    {{ range .Themes }}
+                        <option value="{{ . }}">{{ . }}</option>
+                    {{ end }}
+                    </select>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </form>
+            </div>
+            <div class="col">
+                <h3>Backup</h3>
+                <a href="/backup/create/"><button type="submit" class="btn btn-primary">Create DB backup on disk</button></a>
+                &nbsp;&nbsp;
+                <a href="/backup/download"><button type="submit" class="btn btn-success">Download</button></a>
+                <br>
+                <br>
+                <p>Upload Database from file</p>
+                <form enctype="multipart/form-data" action="/upload/" method="post">
+                    <input type="file" name="dbfile" class="form-control text-dark"/>
+                    <button type="submit" class="btn btn-danger">Upload</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <h3>Edit or delete table</h3>
+        </div>
     </div>
         
 

@@ -10,11 +10,12 @@ func CreateDB(path string) {
 	if _, err := os.Stat(path); err == nil {
         log.Println("INFO: DB exists")
     } else {
-		sqlStatement := `CREATE TABLE "fTBZ96" (
+		sqlStatement := `CREATE TABLE "%s" (
 			"ID"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 			"NAME"	TEXT NOT NULL,
 			"DATE"	TEXT NOT NULL
 		);`
+		sqlStatement = fmt.Sprintf(sqlStatement, MainTable)
     	db_exec(path, sqlStatement)
 		log.Println("INFO: DB created!")
     }
