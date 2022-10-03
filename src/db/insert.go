@@ -13,7 +13,7 @@ func InsertTableList(path string, table Table) {
 	db_exec(path, sqlStatement)
 }
 
-func InsertOneTable(path string, table string, item Item) {
+func InsertItem(path string, table string, item Item) {
 	sqlStatement := `INSERT INTO "%s" (DATE, NAME, COLOR, COUNT, PLACE, SORT) 
 					 VALUES ('%s','%s','%s','%d','%s','%d');`
   	sqlStatement = fmt.Sprintf(sqlStatement, table, item.Date, item.Name, item.Color, item.Count, item.Place, item.Sort)

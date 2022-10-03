@@ -25,6 +25,8 @@ func Webgui(appConfig Conf) {
 	http.HandleFunc("/add_table/", add_table)
 	http.HandleFunc("/backup/", backup)
 	http.HandleFunc("/config/", config)
+	http.HandleFunc("/dashboard_delete/", dashboard_delete)
+	http.HandleFunc("/dashboard_rename/", dashboard_rename)
 	http.HandleFunc("/del_line/", del_line)
 	http.HandleFunc("/edit_line/", edit_line)
 	http.HandleFunc("/new_line/", new_line)

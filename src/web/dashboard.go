@@ -2,7 +2,7 @@ package web
 
 import (
 	"fmt"
-	"log"
+	// "log"
 	"net/http"
 	"html/template"
 	"github.com/aceberg/HomeLists/db"
@@ -28,7 +28,6 @@ func add_table(w http.ResponseWriter, r *http.Request) {
 	} else {
 		currentTime := time.Now()
 		newTable.Date = currentTime.Format("2006-01-02")
-		log.Println("INFO: Added table", newTable)
 
 		db.InsertTableList(Data.Config.DbPath, newTable)
 		db.CreateTable(Data.Config.DbPath, newTable.Name)

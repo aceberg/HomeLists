@@ -31,6 +31,17 @@
         </div>
         <div class="row">
             <h3>Edit or delete table</h3>
+            {{ range .TableList }}
+                <form action="/dashboard_rename/" method="post">
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-primary" hidden></button>
+                        <button type="submit" class="btn btn-danger" formaction="/dashboard_delete/" formmethod="post">Delete</button>
+                        <input name="id" type="hidden" class="form-control" value="{{ .Id }}">
+                        <input name="name" type="text" class="form-control text-dark" value="{{ .Name }}" style="max-width: 25%">
+                        <button type="submit" class="btn btn-primary">Rename</button>
+                    </div>
+                </form>
+            {{ end }}
         </div>
     </div>
         

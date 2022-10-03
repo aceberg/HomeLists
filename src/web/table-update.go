@@ -25,7 +25,7 @@ func new_line(w http.ResponseWriter, r *http.Request) {
 
 	item.Place = r.FormValue("place")
 
-	db.InsertOneTable(Data.Config.DbPath, Data.CurrentTable, item)
+	db.InsertItem(Data.Config.DbPath, Data.CurrentTable, item)
   
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)
 }
@@ -63,7 +63,7 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 			edit_line(w, r)
 
 		} else { 
-			db.UpdateOneTable(Data.Config.DbPath, Data.CurrentTable, item)
+			db.UpdateItem(Data.Config.DbPath, Data.CurrentTable, item)
 	
 			path := "/table/" + Data.CurrentTable
 
