@@ -3,7 +3,7 @@ package db
 import (
 	// "fmt"
 	"log"
-	// "database/sql"
+	"sort"
 	. "github.com/aceberg/HomeLists/models"
 )
 
@@ -20,7 +20,11 @@ func SelectTableList(path string) ([]Table) {
 		
 		tableList = append(tableList, oneItem)
 	}
-	// fmt.Println("TABLES:", tableList)
+	
+	sort.SliceStable(tableList, func(i, j int) bool {
+		return tableList[i].Name < tableList[j].Name
+	})
+
 	return tableList
 }
 

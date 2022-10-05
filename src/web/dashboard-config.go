@@ -15,8 +15,8 @@ func dashboard_delete(w http.ResponseWriter, r *http.Request) {
 
 	id, _ := strconv.Atoi(idStr)
 
-	db.DeleteTable(Data.Config.DbPath, name, uint16(id))
-	Data.TableList = db.SelectTableList(Data.Config.DbPath)
+	db.DeleteTable(AppConfig.DbPath, name, uint16(id))
+	TableList = db.SelectTableList(AppConfig.DbPath)
 
 	log.Println("INFO: Deleted table", name)
 
@@ -28,15 +28,15 @@ func dashboard_rename(w http.ResponseWriter, r *http.Request) {
 	name := r.FormValue("name")
 
 	oldName := ""
-	for _, oneTable := range Data.TableList {
+	for _, oneTable := range TableList {
 		if oneTable.Id == idStr {
 			oldName = oneTable.Name
 		}
 	} 
 	id, _ := strconv.Atoi(idStr)
 
-	db.UpdateTable(Data.Config.DbPath, oldName, name, uint16(id))
-	Data.TableList = db.SelectTableList(Data.Config.DbPath)
+	db.UpdateTable(AppConfig.DbPath, oldName, name, uint16(id))
+	TableList = db.SelectTableList(AppConfig.DbPath)
 
 	log.Println("INFO: Updated table name:", oldName, "->", name)
 

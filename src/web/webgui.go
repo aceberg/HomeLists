@@ -8,14 +8,15 @@ import (
 	. "github.com/aceberg/HomeLists/models"
 )
 
-var Data GuiData
+var AppConfig Conf
+var TableList []Table
 
 func Webgui(appConfig Conf) {
 
-	Data.Config = appConfig
-	Data.TableList = db.SelectTableList(Data.Config.DbPath)
+	AppConfig = appConfig
+	TableList = db.SelectTableList(AppConfig.DbPath)
 
-	address := Data.Config.GuiIP + ":" + Data.Config.GuiPort
+	address := AppConfig.GuiIP + ":" + AppConfig.GuiPort
 
 	log.Println("=================================== ")
 	log.Println(fmt.Sprintf("Web GUI at http://%s", address))

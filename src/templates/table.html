@@ -9,9 +9,10 @@
                 <form action="/update_line/" method="post">
                   <div class="input-group">
                       <button type="submit" class="btn btn-primary" hidden></button>
-                      <button name="edit" value="yes" type="submit" formaction="/update_line/" formmethod="post" class="btn btn-outline-warning" >
+                      <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" >
                         <i class="bi bi-pencil"></i>
                       </button>
+                      <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
                       <input name="id" type="hidden" class="form-control" value="{{ .Id }}">
                       <input name="color" type="hidden" class="form-control" value="{{ .Color }}">
                       <input name="date" type="date" style="max-width: 25%; background-color: {{ .Color }}" class="form-control" value="{{ .Date }}">
@@ -25,6 +26,7 @@
                 {{ end }}
                 {{ end }}
                 <form action="/new_line/" method="post">
+                  <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
                   <button name="place" type="submit" class="btn btn-success" value="Left">New</button>
                 </form>
             </div>
@@ -34,9 +36,10 @@
                 <form action="/update_line/" method="post">
                   <div class="input-group">
                       <button type="submit" class="btn btn-primary" hidden></button>
-                      <button name="edit" value="yes" type="submit" formaction="/update_line/" formmethod="post" class="btn btn-outline-warning" >
+                      <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" >
                         <i class="bi bi-pencil"></i>
                       </button>
+                      <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
                       <input name="id" type="hidden" class="form-control" value="{{ .Id }}">
                       <input name="color" type="hidden" class="form-control" value="{{ .Color }}">
                       <input name="date" type="date" style="max-width: 25%; background-color: {{ .Color }}" class="form-control" value="{{ .Date }}">
@@ -50,6 +53,7 @@
                 {{ end }}
                 {{ end }}
                 <form action="/new_line/" method="post">
+                  <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
                   <button name="place" type="submit" class="btn btn-success" value="Right">New</button>
               </form>
             </div>

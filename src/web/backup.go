@@ -21,10 +21,10 @@ func backup(w http.ResponseWriter, r *http.Request) {
 	case "create":
 		backupString := "-" + currentTime.Format("2006-01-02T15-04")
 
-		sourceFile, _ := os.Open(Data.Config.DbPath)
+		sourceFile, _ := os.Open(AppConfig.DbPath)
 		defer sourceFile.Close()
 
-		newFile, _ := os.Create(Data.Config.DbPath + backupString)
+		newFile, _ := os.Create(AppConfig.DbPath + backupString)
 		defer newFile.Close()
 
 		io.Copy(newFile, sourceFile)
@@ -36,7 +36,7 @@ func backup(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Set("Content-Disposition", "attachment; filename="+filename)
 		w.Header().Set("Content-Type", "application/octet-stream")
-		http.ServeFile(w, r, Data.Config.DbPath)
+		http.ServeFile(w, r, AppConfig.DbPath)
 	}
 }
 
@@ -47,7 +47,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 	} else {
 		defer uploadFile.Close()
 
-		newFile, _ := os.Create(Data.Config.DbPath)
+		newFile, _ := os.Create(AppConfig.DbPath)
 		defer newFile.Close()
 
 		io.Copy(newFile, uploadFile)

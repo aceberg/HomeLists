@@ -9,29 +9,37 @@ import (
 )
 
 func del_line(w http.ResponseWriter, r *http.Request) {
+	var currentTable string
+
+	currentTable = r.FormValue("cur_table")
 
 	idInt, _ := strconv.Atoi(r.FormValue("id"))
 	id := uint16(idInt)
 
-	db.DeleteItem(Data.Config.DbPath, Data.CurrentTable, id)
+	db.DeleteItem(AppConfig.DbPath, currentTable, id)
   
-	path := "/table/" + Data.CurrentTable
+	path := "/table/" + currentTable
 
 	http.Redirect(w, r, path, 302)
 }
 
 func new_line(w http.ResponseWriter, r *http.Request) {
 	var item Item
+	var currentTable string
 
+	currentTable = r.FormValue("cur_table")
 	item.Place = r.FormValue("place")
 
-	db.InsertItem(Data.Config.DbPath, Data.CurrentTable, item)
+	db.InsertItem(AppConfig.DbPath, currentTable, item)
   
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)
 }
 
 func update_line(w http.ResponseWriter, r *http.Request) {
 	var item Item
+	var currentTable string
+
+	currentTable = r.FormValue("cur_table")
 
 	idStr := r.FormValue("id")
 	item.Date = r.FormValue("date")
@@ -40,7 +48,6 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 	countStr := r.FormValue("count")
 	item.Place = r.FormValue("place")
 	minus := r.FormValue("minus")
-	edit := r.FormValue("edit")
   
 	if idStr == "" || countStr == "" {
 	  fmt.Fprintf(w, "No data!")
@@ -58,16 +65,10 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 		item.Id = uint16(id)
 		item.Count = uint16(count)
 
-		if edit == "yes" {
-			Data.OneItem = item
-			edit_line(w, r)
-
-		} else { 
-			db.UpdateItem(Data.Config.DbPath, Data.CurrentTable, item)
+		db.UpdateItem(AppConfig.DbPath, currentTable, item)
 	
-			path := "/table/" + Data.CurrentTable
+		path := "/table/" + currentTable
 
-			http.Redirect(w, r, path, 302)
-		}
+		http.Redirect(w, r, path, 302)
 	}
 }

@@ -9,6 +9,7 @@
                     <button class="btn btn-primary">Back</button>
                 </a></td>
                 <td><form action="/del_line/" method="post">
+                    <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
                     <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form></td>
@@ -28,7 +29,10 @@
                     </tr>
                     <tr>
                         <td>Color</td>
-                        <td><input name="color" value="{{ .OneItem.Color }}" type="text" class="form-control text-dark" placeholder="Color"></td>
+                        <td>
+                            <input name="color" value="{{ .OneItem.Color }}" type="text" class="form-control text-dark" placeholder="Color (example: #99ff33)">
+                            <a href="https://www.w3schools.com/colors/colors_picker.asp" target="_blank">Color Picker</a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Count</td>
@@ -49,7 +53,9 @@
                         <td><input name="sort" value="{{ .OneItem.Sort }}" type="number" class="form-control text-dark"></td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td>
+                            <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
+                        </td>
                         <td><button type="submit" class="btn btn-primary">Save</button></td>
                     </tr>
             </form>

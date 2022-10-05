@@ -11,7 +11,6 @@ func main() {
 	appConfig := conf.GetConfig()
 
 	db.CreateDB(appConfig.DbPath)
-	// db.CreateTable(appConfig.DbPath, "test")
 
 	web.Webgui(appConfig)
 }

@@ -11,12 +11,15 @@ import (
 )
 
 func dashboard(w http.ResponseWriter, r *http.Request) {
+	var guiData GuiData
 
-	Data.CurrentTable = "Dashboard"
+	guiData.Config = AppConfig
+	guiData.TableList = TableList
+	guiData.CurrentTable = "Dashboard"
 
 	tmpl, _ := template.ParseFiles("templates/dashboard.html", "templates/header.html", "templates/footer.html")
-	tmpl.ExecuteTemplate(w, "header", Data)
-	tmpl.ExecuteTemplate(w, "dashboard", Data)
+	tmpl.ExecuteTemplate(w, "header", guiData)
+	tmpl.ExecuteTemplate(w, "dashboard", guiData)
 }
 
 func add_table(w http.ResponseWriter, r *http.Request) {
@@ -29,9 +32,9 @@ func add_table(w http.ResponseWriter, r *http.Request) {
 		currentTime := time.Now()
 		newTable.Date = currentTime.Format("2006-01-02")
 
-		db.InsertTableList(Data.Config.DbPath, newTable)
-		db.CreateTable(Data.Config.DbPath, newTable.Name)
-		Data.TableList = db.SelectTableList(Data.Config.DbPath)
+		db.InsertTableList(AppConfig.DbPath, newTable)
+		db.CreateTable(AppConfig.DbPath, newTable.Name)
+		TableList = db.SelectTableList(AppConfig.DbPath)
 	}
 
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)
