@@ -31,6 +31,11 @@ func new_line(w http.ResponseWriter, r *http.Request) {
 	item.Place = r.FormValue("place")
 
 	db.InsertItem(AppConfig.DbPath, currentTable, item)
+
+	itemList := db.SelectOneTable(AppConfig.DbPath, currentTable)
+	item = itemList[len(itemList)-1]
+	item.Sort = item.Id
+	db.UpdateItem(AppConfig.DbPath, currentTable, item)
   
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)
 }
@@ -47,6 +52,7 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 	item.Color = r.FormValue("color")
 	countStr := r.FormValue("count")
 	item.Place = r.FormValue("place")
+	sortStr := r.FormValue("sort")
 	minus := r.FormValue("minus")
   
 	if idStr == "" || countStr == "" {
@@ -54,6 +60,7 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 	} else {
 		id, _ := strconv.Atoi(idStr)
 		count, _ := strconv.Atoi(countStr)
+		sort, _ := strconv.Atoi(sortStr)
 		
 		if minus == "yes" {
 			count = count - 1
@@ -64,6 +71,7 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 
 		item.Id = uint16(id)
 		item.Count = uint16(count)
+		item.Sort = uint16(sort)
 
 		db.UpdateItem(AppConfig.DbPath, currentTable, item)
 	

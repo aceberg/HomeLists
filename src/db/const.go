@@ -1,3 +1,3 @@
 package db
 
-const MainTable = "fTBZ96"
+const MainTable = "FArL13ZaYIkm"

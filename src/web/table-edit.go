@@ -23,12 +23,15 @@ func edit_line(w http.ResponseWriter, r *http.Request) {
 	guiData.OneItem.Color = r.FormValue("color")
 	countStr := r.FormValue("count")
 	guiData.OneItem.Place = r.FormValue("place")
+	sortStr := r.FormValue("sort")
 
 	id, _ := strconv.Atoi(idStr)
 	count, _ := strconv.Atoi(countStr)
+	sort, _ := strconv.Atoi(sortStr)
 	
 	guiData.OneItem.Id = uint16(id)
 	guiData.OneItem.Count = uint16(count)
+	guiData.OneItem.Sort = uint16(sort)
 
 	tmpl, _ := template.ParseFiles("templates/table-edit.html", "templates/header.html", "templates/footer.html")
 	tmpl.ExecuteTemplate(w, "header", guiData)

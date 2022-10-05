@@ -2,6 +2,7 @@ package web
 
 import (
 	// "fmt"
+	"sort"
 	"strings"
 	"net/http"
 	"html"
@@ -20,6 +21,10 @@ func table(w http.ResponseWriter, r *http.Request) {
 		guiData.CurrentTable = tags[2]
 		
 		guiData.ItemList = db.SelectOneTable(AppConfig.DbPath, guiData.CurrentTable)
+
+		sort.SliceStable(guiData.ItemList, func(i, j int) bool {
+			return guiData.ItemList[i].Sort < guiData.ItemList[j].Sort
+		})
 
 		lines := len(guiData.ItemList)
 		db.UpdateTable(AppConfig.DbPath, uint16(lines), guiData.CurrentTable)

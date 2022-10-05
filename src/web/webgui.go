@@ -32,6 +32,8 @@ func Webgui(appConfig Conf) {
 	http.HandleFunc("/edit_line/", edit_line)
 	http.HandleFunc("/new_line/", new_line)
 	http.HandleFunc("/save_config/", save_config)
+	http.HandleFunc("/sort_before/", sort_before)
+	http.HandleFunc("/sort_by_id/", sort_by_id)
 	http.HandleFunc("/table/", table)
 	http.HandleFunc("/update_line/", update_line)
 	http.HandleFunc("/upload/", upload)

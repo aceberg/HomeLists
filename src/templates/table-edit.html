@@ -50,7 +50,7 @@
                     </tr>
                     <tr>
                         <td>Sort</td>
-                        <td><input name="sort" value="{{ .OneItem.Sort }}" type="number" class="form-control text-dark"></td>
+                        <td><input name="sort" value="{{ .OneItem.Sort }}" type="number" class="form-control text-dark" readonly></td>
                     </tr>
                     <tr>
                         <td>
@@ -60,6 +60,24 @@
                     </tr>
             </form>
         </table>
+        <div class="row">
+            <h3>Sort</h3>
+            <div class="col">
+                <form action="/sort_by_id/" method="post">
+                    <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
+                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
+                    <button type="submit" class="btn btn-warning">Sort by ID</button>
+                </form>
+            </div>
+            <div class="col">
+                <form action="/sort_before/" method="post">
+                    <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
+                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
+                    <input name="before" type="number" class="form-control">
+                    <button type="submit" class="btn btn-primary">Sort before</button>
+                </form>
+            </div>
+        </div>
     </div>
         
 
