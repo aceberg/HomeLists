@@ -13,9 +13,6 @@ import (
 func table(w http.ResponseWriter, r *http.Request) {
 	var guiData GuiData
 
-	guiData.Config = AppConfig
-	guiData.TableList = TableList
-
 	if r.Method == "GET" {
 		urlString := html.EscapeString(r.URL.Path)
 		tags := strings.Split(urlString, "/")
@@ -23,9 +20,17 @@ func table(w http.ResponseWriter, r *http.Request) {
 		guiData.CurrentTable = tags[2]
 		
 		guiData.ItemList = db.SelectOneTable(AppConfig.DbPath, guiData.CurrentTable)
+
+		lines := len(guiData.ItemList)
+		db.UpdateTable(AppConfig.DbPath, uint16(lines), guiData.CurrentTable)
+		TableList = db.SelectTableList(AppConfig.DbPath)
+
 	} else {
 		guiData.ItemList = []Item{}
 	}
+
+	guiData.Config = AppConfig
+	guiData.TableList = TableList
 
 	tmpl, _ := template.ParseFiles("templates/table.html", "templates/header.html", "templates/footer.html")
 	tmpl.ExecuteTemplate(w, "header", guiData)

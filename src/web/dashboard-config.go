@@ -35,7 +35,7 @@ func dashboard_rename(w http.ResponseWriter, r *http.Request) {
 	} 
 	id, _ := strconv.Atoi(idStr)
 
-	db.UpdateTable(AppConfig.DbPath, oldName, name, uint16(id))
+	db.RenameTable(AppConfig.DbPath, oldName, name, uint16(id))
 	TableList = db.SelectTableList(AppConfig.DbPath)
 
 	log.Println("INFO: Updated table name:", oldName, "->", name)

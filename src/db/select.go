@@ -13,11 +13,13 @@ func SelectTableList(path string) ([]Table) {
 	tableList := []Table{}
 	for rows.Next() {
 		var oneItem Table
-		err := rows.Scan(&oneItem.Id, &oneItem.Name, &oneItem.Date)
+		err := rows.Scan(&oneItem.Id, &oneItem.Name, &oneItem.Date, &oneItem.Lines)
 		if err != nil {
 			log.Fatal("ERROR: SelectTableList: ", err)
 		}
 		
+		oneItem.Name = unquote_str(oneItem.Name)
+
 		tableList = append(tableList, oneItem)
 	}
 	
@@ -39,6 +41,10 @@ func SelectOneTable(path string, tableName string) ([]Item) {
 			log.Fatal("ERROR: SelectOneTable: ", err)
 		}
 		
+		oneItem.Date = unquote_str(oneItem.Date)
+		oneItem.Name = unquote_str(oneItem.Name)
+		oneItem.Color = unquote_str(oneItem.Color)
+
 		itemList = append(itemList, oneItem)
 	}
 	// fmt.Println("ITEMS:", itemList)

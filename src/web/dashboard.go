@@ -14,7 +14,7 @@ func dashboard(w http.ResponseWriter, r *http.Request) {
 	var guiData GuiData
 
 	guiData.Config = AppConfig
-	guiData.TableList = TableList
+	guiData.TableList = db.SelectTableList(AppConfig.DbPath)
 	guiData.CurrentTable = "Dashboard"
 
 	tmpl, _ := template.ParseFiles("templates/dashboard.html", "templates/header.html", "templates/footer.html")

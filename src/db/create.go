@@ -13,7 +13,8 @@ func CreateDB(path string) {
 		sqlStatement := `CREATE TABLE "%s" (
 			"ID"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 			"NAME"	TEXT NOT NULL,
-			"DATE"	TEXT NOT NULL
+			"DATE"	TEXT NOT NULL,
+			"LINES"	INTEGER DEFAULT 0
 		);`
 		sqlStatement = fmt.Sprintf(sqlStatement, MainTable)
     	db_exec(path, sqlStatement)
@@ -22,7 +23,7 @@ func CreateDB(path string) {
 }
 
 func CreateTable(path string, tableName string) {
-	sqlStatement := `CREATE TABLE "%s" (
+	sqlStatement := `CREATE TABLE IF NOT EXISTS "%s" (
 		"ID"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 		"DATE"	TEXT NOT NULL,
 		"NAME"	TEXT NOT NULL,
@@ -31,7 +32,7 @@ func CreateTable(path string, tableName string) {
 		"PLACE"	TEXT NOT NULL,
 		"SORT"	INTEGER DEFAULT 0
 	);`
-	sqlStatement = fmt.Sprintf(sqlStatement, tableName)
+	sqlStatement = fmt.Sprintf(sqlStatement, quote_str(tableName))
     db_exec(path, sqlStatement)
 	log.Println("INFO: Created table", tableName)
 }
