@@ -13,12 +13,19 @@ import (
 func table(w http.ResponseWriter, r *http.Request) {
 	var guiData GuiData
 
-	if r.Method == "GET" {
-		urlString := html.EscapeString(r.URL.Path)
-		tags := strings.Split(urlString, "/")
+	urlString := html.EscapeString(r.URL.Path)
+	tags := strings.Split(urlString, "/")
 
-		guiData.CurrentTable = tags[2]
-		
+	guiData.CurrentTable = tags[2]
+
+	check := false
+	for _, oneTable := range TableList {
+		if oneTable.Name == guiData.CurrentTable {
+			check = true
+		}
+	}
+
+	if check {	
 		guiData.ItemList = db.SelectOneTable(AppConfig.DbPath, guiData.CurrentTable)
 
 		sort.SliceStable(guiData.ItemList, func(i, j int) bool {
@@ -29,14 +36,13 @@ func table(w http.ResponseWriter, r *http.Request) {
 		db.UpdateTable(AppConfig.DbPath, uint16(lines), guiData.CurrentTable)
 		TableList = db.SelectTableList(AppConfig.DbPath)
 
+		guiData.Config = AppConfig
+		guiData.TableList = TableList
+	
+		tmpl, _ := template.ParseFiles("templates/table.html", "templates/header.html", "templates/footer.html")
+		tmpl.ExecuteTemplate(w, "header", guiData)
+		tmpl.ExecuteTemplate(w, "table", guiData)
 	} else {
-		guiData.ItemList = []Item{}
+		http.Redirect(w, r, "/", 302)
 	}
-
-	guiData.Config = AppConfig
-	guiData.TableList = TableList
-
-	tmpl, _ := template.ParseFiles("templates/table.html", "templates/header.html", "templates/footer.html")
-	tmpl.ExecuteTemplate(w, "header", guiData)
-	tmpl.ExecuteTemplate(w, "table", guiData)
 }

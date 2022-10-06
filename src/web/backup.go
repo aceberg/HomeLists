@@ -28,6 +28,7 @@ func backup(w http.ResponseWriter, r *http.Request) {
 		defer newFile.Close()
 
 		io.Copy(newFile, sourceFile)
+		log.Println("INFO: backup file created", AppConfig.DbPath + backupString)
 
 		http.Redirect(w, r, r.Header.Get("Referer"), 302)
 
@@ -37,13 +38,15 @@ func backup(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Disposition", "attachment; filename="+filename)
 		w.Header().Set("Content-Type", "application/octet-stream")
 		http.ServeFile(w, r, AppConfig.DbPath)
+	default:
+		http.Redirect(w, r, "/config/", 302)
 	}
 }
 
 func upload(w http.ResponseWriter, r *http.Request) {
     uploadFile, _, err := r.FormFile("dbfile")
 	if err != nil {
-		log.Println("Upload error:", err)
+		log.Println("ERROR: Upload error:", err)
 	} else {
 		defer uploadFile.Close()
 
@@ -51,6 +54,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		defer newFile.Close()
 
 		io.Copy(newFile, uploadFile)
+		log.Println("INFO: DB uploaded from backup")
 	}
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)
 }
