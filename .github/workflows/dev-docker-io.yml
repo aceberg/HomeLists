@@ -3,10 +3,10 @@ name: Dev-to-docker.io
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
-    # paths:
-    # - 'Dockerfile'
-    # - 'src/**'
+    branches: [ "dev" ]
+    paths:
+    - 'Dockerfile'
+    - 'src/**'
 
 env:
   IMAGE_NAME: homelists
