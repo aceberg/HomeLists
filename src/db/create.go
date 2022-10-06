@@ -10,7 +10,7 @@ func CreateDB(path string) {
 	if _, err := os.Stat(path); err == nil {
         log.Println("INFO: DB exists")
     } else {
-		sqlStatement := `CREATE TABLE "%s" (
+		sqlStatement := `CREATE TABLE '%s' (
 			"ID"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 			"NAME"	TEXT NOT NULL,
 			"DATE"	TEXT NOT NULL,
@@ -23,7 +23,7 @@ func CreateDB(path string) {
 }
 
 func CreateTable(path string, tableName string) {
-	sqlStatement := `CREATE TABLE IF NOT EXISTS "%s" (
+	sqlStatement := `CREATE TABLE IF NOT EXISTS '%s' (
 		"ID"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 		"DATE"	TEXT NOT NULL,
 		"NAME"	TEXT NOT NULL,

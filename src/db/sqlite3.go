@@ -21,8 +21,8 @@ func db_select(path string, table string) (*sql.Rows) {
 	db, _ := sql.Open("sqlite3", path)
 	defer db.Close()
   
-	sqlStatement := `SELECT * FROM "%s";`
-	sqlStatement = fmt.Sprintf(sqlStatement, table)
+	sqlStatement := `SELECT * FROM '%s';`
+	sqlStatement = fmt.Sprintf(sqlStatement, quote_str(table))
 
 	res, err := db.Query(sqlStatement)
 	if err != nil {

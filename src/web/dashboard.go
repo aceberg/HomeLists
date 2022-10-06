@@ -1,13 +1,14 @@
 package web
 
 import (
-	"fmt"
-	// "log"
+	// "fmt"
+	"log"
 	"net/http"
 	"html/template"
 	"github.com/aceberg/HomeLists/db"
 	. "github.com/aceberg/HomeLists/models"
 	"time"
+	"strings"
 )
 
 func dashboard(w http.ResponseWriter, r *http.Request) {
@@ -26,15 +27,17 @@ func add_table(w http.ResponseWriter, r *http.Request) {
 	var newTable Table
 	newTable.Name = r.FormValue("name")
 
-	if newTable.Name == "" {
-		fmt.Fprintf(w, "No data!")
-	} else {
+	check := strings.ContainsAny(newTable.Name, "<>?/#&'\"")
+
+	if newTable.Name != "" && newTable.Name != "." && !check {
 		currentTime := time.Now()
 		newTable.Date = currentTime.Format("2006-01-02")
 
-		db.InsertTableList(AppConfig.DbPath, newTable)
 		db.CreateTable(AppConfig.DbPath, newTable.Name)
+		db.InsertTableList(AppConfig.DbPath, newTable)
 		TableList = db.SelectTableList(AppConfig.DbPath)
+	} else {
+		log.Println("ERROR: incorrect table name", newTable.Name)
 	}
 
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)

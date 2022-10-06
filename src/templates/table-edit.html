@@ -2,6 +2,25 @@
 
 <body>
     <div class="container mt-5">
+        <div class="row">
+            <h3>Sort</h3>
+            <div class="col"></div>
+            <div class="col">
+                <form action="/sort_before/" method="post" class="input-group">
+                    <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
+                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
+                    <button type="submit" class="btn btn-primary">Place before</button>
+                    <input name="before" type="number" class="form-control" style="max-width: 50%" placeholder="Sort number">
+                </form>
+            </div>
+            <div class="col">
+                <form action="/sort_by_id/" method="post">
+                    <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
+                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
+                    <button type="submit" class="btn btn-warning">Sort table by ID</button>
+                </form>
+            </div>
+        </div>
         <h3>Edit</h3>
         <table class="table">
             <tr>
@@ -60,24 +79,6 @@
                     </tr>
             </form>
         </table>
-        <div class="row">
-            <h3>Sort</h3>
-            <div class="col">
-                <form action="/sort_by_id/" method="post">
-                    <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
-                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
-                    <button type="submit" class="btn btn-warning">Sort by ID</button>
-                </form>
-            </div>
-            <div class="col">
-                <form action="/sort_before/" method="post">
-                    <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
-                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
-                    <input name="before" type="number" class="form-control">
-                    <button type="submit" class="btn btn-primary">Sort before</button>
-                </form>
-            </div>
-        </div>
     </div>
         
 
