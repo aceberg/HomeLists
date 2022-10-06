@@ -1,0 +1,14 @@
+version: "3"
+services:
+  homelists:
+    image: aceberg/homelists       
+    restart: unless-stopped
+    ports:
+    - 8842:8842
+    volumes:
+    - ~/.dockerdata/homelists:/data/homelists
+    environment:
+      TZ: Asia/Novosibirsk                # required: needs your TZ for correct time
+      DBPATH: "/data/homelists/sqlite.db" # optional, default: /data/homelists/sqlite.db
+      GUIPORT: "8842"                     # optional, default: 8842
+      THEME: "superhero"                  # optional, default: superhero
