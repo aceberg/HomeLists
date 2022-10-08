@@ -34,13 +34,10 @@
                 </form></td>
             </tr>
             <form action="/update_line/" method="post">
-                    <tr>
-                        <td>ID</td>
-                        <td><input name="id" value="{{ .OneItem.Id }}" type="text" class="form-control" readonly></td>
-                    </tr>
+                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control" readonly>
                     <tr>
                         <td>Date</td>
-                        <td><input name="date" value="{{ .OneItem.Date }}" type="date" class="form-control text-dark" placeholder="Date"></td>
+                        <td><input name="date" value="{{ .OneItem.Date }}" type="text" class="form-control text-dark" placeholder="Date"></td>
                     </tr>
                     <tr>
                         <td>Name</td>
@@ -49,8 +46,20 @@
                     <tr>
                         <td>Color</td>
                         <td>
-                            <input name="color" value="{{ .OneItem.Color }}" type="text" class="form-control text-dark" placeholder="Color (example: #99ff33)">
-                            <a href="https://www.w3schools.com/colors/colors_picker.asp" target="_blank">Color Picker</a>
+                        <div class="input-group">
+                            <select name="color" class="form-select">
+                                <option selected disabled>Select color</option>
+                                <option value="">None</option>
+                                {{ range .Colors }}
+                                <option value="{{ .Code }}">{{ .Name }} ({{ .Code }})</option>
+                                {{ end }}
+                            </select>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Or input color code</span>
+                             </div>
+                            <input name="color" value="{{ .OneItem.Color }}" type="text" class="form-control text-dark" placeholder="Example: #99ff33" style="background-color: {{ .OneItem.Color }}">
+                        </div>
+                        <a href="https://www.w3schools.com/colors/colors_picker.asp" target="_blank">Color Picker</a>
                         </td>
                     </tr>
                     <tr>

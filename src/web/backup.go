@@ -28,7 +28,7 @@ func backup(w http.ResponseWriter, r *http.Request) {
 		defer newFile.Close()
 
 		io.Copy(newFile, sourceFile)
-		log.Println("INFO: backup file created", AppConfig.DbPath + backupString)
+		log.Println("INFO: Backup file created", AppConfig.DbPath + backupString)
 
 		http.Redirect(w, r, r.Header.Get("Referer"), 302)
 

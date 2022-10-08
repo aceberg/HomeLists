@@ -12,6 +12,17 @@ import (
 func edit_line(w http.ResponseWriter, r *http.Request) {
 	var guiData GuiData
 
+	guiData.Colors = []LineColor{
+		{ Name: "Blue",   Code: "#b3d1ff" },
+		{ Name: "Cyan",   Code: "#b3ffff" },
+		{ Name: "Green",  Code: "#b3ffb3" },
+		{ Name: "Orange", Code: "#ffe0b3" },
+		{ Name: "Pink",   Code: "#ffccff" },
+		{ Name: "Purple", Code: "#ecb3ff" },
+		{ Name: "Red",    Code: "#ffb3b3" },
+		{ Name: "Yellow", Code: "#ffffb3" },
+	}
+
 	guiData.Config = AppConfig
 	guiData.TableList = TableList
 

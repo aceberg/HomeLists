@@ -1,5 +1,10 @@
 package models
 
+type LineColor struct {
+	Name string
+	Code string
+}
+
 type GuiData struct {
 	Config 		 Conf
 	CurrentTable string
@@ -7,4 +12,5 @@ type GuiData struct {
 	ItemList 	 []Item
 	OneItem		 Item
 	Themes 		 []string
+	Colors		 []LineColor
 }
