@@ -1,4 +1,7 @@
-# HomeLists
+<h1><a href="https://github.com/aceberg/HomeLists">
+    <img src="https://raw.githubusercontent.com/aceberg/HomeLists/main/assets/logo.png" width="20" />
+</a>HomeLists</h1>
+<br/>
 
 [![Docker](https://github.com/aceberg/HomeLists/actions/workflows/main-docker-all.yml/badge.svg)](https://github.com/aceberg/HomeLists/actions/workflows/main-docker-all.yml)
 ![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/aceberg/homelists)
@@ -41,3 +44,4 @@ Config file path is `/data/homelists/config`. All variables could be set there.
 - All go packages listed in [dependencies](https://github.com/aceberg/go-homelists/network/dependencies)
 - [Bootstrap](https://getbootstrap.com/)
 - Themes: [Free themes for Bootstrap](https://bootswatch.com)
+- Favicon and logo: [List icons created by Freepik - Flaticon](https://www.flaticon.com/free-icon/list_3039383?related_id=3039383&origin=search)
