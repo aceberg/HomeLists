@@ -2,14 +2,14 @@ package web
 
 import (
 	// "fmt"
-	"strconv"
-	"net/http"
 	"github.com/aceberg/HomeLists/db"
 	. "github.com/aceberg/HomeLists/models"
+	"net/http"
+	"strconv"
 )
 
 func sort_by_id(w http.ResponseWriter, r *http.Request) {
-	
+
 	currentTable := r.FormValue("cur_table")
 
 	itemList := db.SelectOneTable(AppConfig.DbPath, currentTable)

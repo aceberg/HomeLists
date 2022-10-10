@@ -2,22 +2,20 @@ package web
 
 import (
 	"fmt"
-	"strconv"
-	"net/http"
 	"github.com/aceberg/HomeLists/db"
 	. "github.com/aceberg/HomeLists/models"
+	"net/http"
+	"strconv"
 )
 
 func del_line(w http.ResponseWriter, r *http.Request) {
-	var currentTable string
-
-	currentTable = r.FormValue("cur_table")
+	currentTable := r.FormValue("cur_table")
 
 	idInt, _ := strconv.Atoi(r.FormValue("id"))
 	id := uint16(idInt)
 
 	db.DeleteItem(AppConfig.DbPath, currentTable, id)
-  
+
 	path := "/table/" + currentTable
 
 	http.Redirect(w, r, path, 302)
@@ -25,9 +23,8 @@ func del_line(w http.ResponseWriter, r *http.Request) {
 
 func new_line(w http.ResponseWriter, r *http.Request) {
 	var item Item
-	var currentTable string
 
-	currentTable = r.FormValue("cur_table")
+	currentTable := r.FormValue("cur_table")
 	item.Place = r.FormValue("place")
 
 	db.InsertItem(AppConfig.DbPath, currentTable, item)
@@ -36,15 +33,14 @@ func new_line(w http.ResponseWriter, r *http.Request) {
 	item = itemList[len(itemList)-1]
 	item.Sort = item.Id
 	db.UpdateItem(AppConfig.DbPath, currentTable, item)
-  
+
 	http.Redirect(w, r, r.Header.Get("Referer"), 302)
 }
 
 func update_line(w http.ResponseWriter, r *http.Request) {
 	var item Item
-	var currentTable string
 
-	currentTable = r.FormValue("cur_table")
+	currentTable := r.FormValue("cur_table")
 
 	idStr := r.FormValue("id")
 	item.Date = r.FormValue("date")
@@ -54,14 +50,14 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 	item.Place = r.FormValue("place")
 	sortStr := r.FormValue("sort")
 	minus := r.FormValue("minus")
-  
+
 	if idStr == "" || countStr == "" {
-	  fmt.Fprintf(w, "No data!")
+		fmt.Fprintf(w, "No data!")
 	} else {
 		id, _ := strconv.Atoi(idStr)
 		count, _ := strconv.Atoi(countStr)
 		sort, _ := strconv.Atoi(sortStr)
-		
+
 		if minus == "yes" {
 			count = count - 1
 		}
@@ -74,7 +70,7 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 		item.Sort = uint16(sort)
 
 		db.UpdateItem(AppConfig.DbPath, currentTable, item)
-	
+
 		path := "/table/" + currentTable
 
 		http.Redirect(w, r, path, 302)

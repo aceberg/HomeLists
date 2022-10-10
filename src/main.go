@@ -2,8 +2,8 @@ package main
 
 import (
 	// "fmt"
-	"github.com/aceberg/HomeLists/db"
 	"github.com/aceberg/HomeLists/conf"
+	"github.com/aceberg/HomeLists/db"
 	"github.com/aceberg/HomeLists/web"
 )
 

@@ -2,9 +2,9 @@ package web
 
 import (
 	// "fmt"
+	"github.com/aceberg/HomeLists/db"
 	"log"
 	"net/http"
-	"github.com/aceberg/HomeLists/db"
 	// . "github.com/aceberg/HomeLists/models"
 	"strconv"
 )
@@ -32,7 +32,7 @@ func dashboard_rename(w http.ResponseWriter, r *http.Request) {
 		if oneTable.Id == idStr {
 			oldName = oneTable.Name
 		}
-	} 
+	}
 	id, _ := strconv.Atoi(idStr)
 
 	db.RenameTable(AppConfig.DbPath, oldName, name, uint16(id))

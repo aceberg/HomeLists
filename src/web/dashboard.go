@@ -2,20 +2,22 @@ package web
 
 import (
 	// "fmt"
-	"log"
-	"net/http"
-	"html/template"
 	"github.com/aceberg/HomeLists/db"
 	. "github.com/aceberg/HomeLists/models"
-	"time"
+	"html/template"
+	"log"
+	"net/http"
 	"strings"
+	"time"
 )
 
 func dashboard(w http.ResponseWriter, r *http.Request) {
 	var guiData GuiData
 
+	TableList = db.SelectTableList(AppConfig.DbPath)
+
 	guiData.Config = AppConfig
-	guiData.TableList = db.SelectTableList(AppConfig.DbPath)
+	guiData.TableList = TableList
 	guiData.CurrentTable = "Dashboard"
 
 	tmpl, _ := template.ParseFiles("templates/dashboard.html", "templates/header.html", "templates/footer.html")

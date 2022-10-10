@@ -1,15 +1,15 @@
 package db
 
 import (
-	"os"
-	"log"
 	"fmt"
+	"log"
+	"os"
 )
 
 func CreateDB(path string) {
 	if _, err := os.Stat(path); err == nil {
-        log.Println("INFO: DB exists")
-    } else {
+		log.Println("INFO: DB exists")
+	} else {
 		sqlStatement := `CREATE TABLE '%s' (
 			"ID"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 			"NAME"	TEXT NOT NULL,
@@ -17,9 +17,9 @@ func CreateDB(path string) {
 			"LINES"	INTEGER DEFAULT 0
 		);`
 		sqlStatement = fmt.Sprintf(sqlStatement, MainTable)
-    	db_exec(path, sqlStatement)
+		db_exec(path, sqlStatement)
 		log.Println("INFO: DB created!")
-    }
+	}
 }
 
 func CreateTable(path string, tableName string) {
@@ -33,6 +33,6 @@ func CreateTable(path string, tableName string) {
 		"SORT"	INTEGER DEFAULT 0
 	);`
 	sqlStatement = fmt.Sprintf(sqlStatement, quote_str(tableName))
-    db_exec(path, sqlStatement)
+	db_exec(path, sqlStatement)
 	log.Println("INFO: Created table", tableName)
 }

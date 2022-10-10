@@ -1,10 +1,10 @@
 package web
 
 import (
-	"net/http"
-	"html/template"
 	"github.com/aceberg/HomeLists/conf"
 	. "github.com/aceberg/HomeLists/models"
+	"html/template"
+	"net/http"
 )
 
 func config(w http.ResponseWriter, r *http.Request) {

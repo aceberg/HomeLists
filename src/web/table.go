@@ -1,17 +1,19 @@
 package web
 
 import (
-	"sort"
-	"strings"
-	"net/http"
-	"html"
-	"html/template"
 	"github.com/aceberg/HomeLists/db"
 	. "github.com/aceberg/HomeLists/models"
+	"html"
+	"html/template"
+	"net/http"
+	"sort"
+	"strings"
 )
 
 func table(w http.ResponseWriter, r *http.Request) {
 	var guiData GuiData
+
+	TableList = db.SelectTableList(AppConfig.DbPath)
 
 	urlString := html.EscapeString(r.URL.Path)
 	tags := strings.Split(urlString, "/")
@@ -25,7 +27,7 @@ func table(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	if check {	
+	if check {
 		guiData.ItemList = db.SelectOneTable(AppConfig.DbPath, guiData.CurrentTable)
 
 		sort.SliceStable(guiData.ItemList, func(i, j int) bool {
@@ -38,7 +40,7 @@ func table(w http.ResponseWriter, r *http.Request) {
 
 		guiData.Config = AppConfig
 		guiData.TableList = TableList
-	
+
 		tmpl, _ := template.ParseFiles("templates/table.html", "templates/header.html", "templates/footer.html")
 		tmpl.ExecuteTemplate(w, "header", guiData)
 		tmpl.ExecuteTemplate(w, "table", guiData)

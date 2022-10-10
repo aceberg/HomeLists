@@ -1,8 +1,8 @@
 package models
 
 type Table struct {
-	Id		string
-	Name 	string
-	Date	string
-	Lines	uint16
+	Id    string
+	Name  string
+	Date  string
+	Lines uint16
 }

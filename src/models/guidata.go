@@ -6,11 +6,11 @@ type LineColor struct {
 }
 
 type GuiData struct {
-	Config 		 Conf
+	Config       Conf
 	CurrentTable string
-	TableList 	 []Table
-	ItemList 	 []Item
-	OneItem		 Item
-	Themes 		 []string
-	Colors		 []LineColor
+	TableList    []Table
+	ItemList     []Item
+	OneItem      Item
+	Themes       []string
+	Colors       []LineColor
 }

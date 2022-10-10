@@ -1,8 +1,8 @@
 package conf
 
 import (
-	"github.com/spf13/viper"
 	. "github.com/aceberg/HomeLists/models"
+	"github.com/spf13/viper"
 )
 
 const configPath = "/data/homelists/config"
@@ -13,9 +13,9 @@ func GetConfig() (config Conf) {
 	viper.SetDefault("GUI_PORT", "8842")
 	viper.SetDefault("THEME", "superhero")
 
-    viper.SetConfigFile(configPath)
+	viper.SetConfigFile(configPath)
 	viper.SetConfigType("env")
-    viper.ReadInConfig()
+	viper.ReadInConfig()
 
 	viper.AutomaticEnv() // Get ENVIRONMENT variables
 

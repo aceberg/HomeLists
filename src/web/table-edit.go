@@ -2,9 +2,9 @@ package web
 
 import (
 	// "fmt"
-	"strconv"
-	"net/http"
 	"html/template"
+	"net/http"
+	"strconv"
 	// "github.com/aceberg/HomeLists/db"
 	. "github.com/aceberg/HomeLists/models"
 )
@@ -13,14 +13,14 @@ func edit_line(w http.ResponseWriter, r *http.Request) {
 	var guiData GuiData
 
 	guiData.Colors = []LineColor{
-		{ Name: "Blue",   Code: "#b3d1ff" },
-		{ Name: "Cyan",   Code: "#b3ffff" },
-		{ Name: "Green",  Code: "#b3ffb3" },
-		{ Name: "Orange", Code: "#ffe0b3" },
-		{ Name: "Pink",   Code: "#ffccff" },
-		{ Name: "Purple", Code: "#ecb3ff" },
-		{ Name: "Red",    Code: "#ffb3b3" },
-		{ Name: "Yellow", Code: "#ffffb3" },
+		{Name: "Blue", Code: "#b3d1ff"},
+		{Name: "Cyan", Code: "#b3ffff"},
+		{Name: "Green", Code: "#b3ffb3"},
+		{Name: "Orange", Code: "#ffe0b3"},
+		{Name: "Pink", Code: "#ffccff"},
+		{Name: "Purple", Code: "#ecb3ff"},
+		{Name: "Red", Code: "#ffb3b3"},
+		{Name: "Yellow", Code: "#ffffb3"},
 	}
 
 	guiData.Config = AppConfig
@@ -39,7 +39,7 @@ func edit_line(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(idStr)
 	count, _ := strconv.Atoi(countStr)
 	sort, _ := strconv.Atoi(sortStr)
-	
+
 	guiData.OneItem.Id = uint16(id)
 	guiData.OneItem.Count = uint16(count)
 	guiData.OneItem.Sort = uint16(sort)

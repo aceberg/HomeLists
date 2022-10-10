@@ -1,12 +1,12 @@
 package web
 
 import (
-	"log"
-	"strings"
 	"html"
-	"net/http"
 	"io"
+	"log"
+	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -28,7 +28,7 @@ func backup(w http.ResponseWriter, r *http.Request) {
 		defer newFile.Close()
 
 		io.Copy(newFile, sourceFile)
-		log.Println("INFO: Backup file created", AppConfig.DbPath + backupString)
+		log.Println("INFO: Backup file created", AppConfig.DbPath+backupString)
 
 		http.Redirect(w, r, r.Header.Get("Referer"), 302)
 
@@ -44,7 +44,7 @@ func backup(w http.ResponseWriter, r *http.Request) {
 }
 
 func upload(w http.ResponseWriter, r *http.Request) {
-    uploadFile, _, err := r.FormFile("dbfile")
+	uploadFile, _, err := r.FormFile("dbfile")
 	if err != nil {
 		log.Println("ERROR: Upload error:", err)
 	} else {

@@ -1,11 +1,11 @@
 package web
 
 import (
-	"fmt"
-	"log"
-	"net/http"
+	// "fmt"
 	"github.com/aceberg/HomeLists/db"
 	. "github.com/aceberg/HomeLists/models"
+	"log"
+	"net/http"
 )
 
 var AppConfig Conf
@@ -19,7 +19,7 @@ func Webgui(appConfig Conf) {
 	address := AppConfig.GuiIP + ":" + AppConfig.GuiPort
 
 	log.Println("=================================== ")
-	log.Println(fmt.Sprintf("Web GUI at http://%s", address))
+	log.Printf("Web GUI at http://%s", address)
 	log.Println("=================================== ")
 
 	http.HandleFunc("/", dashboard)

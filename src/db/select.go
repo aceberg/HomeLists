@@ -2,12 +2,12 @@ package db
 
 import (
 	// "fmt"
+	. "github.com/aceberg/HomeLists/models"
 	"log"
 	"sort"
-	. "github.com/aceberg/HomeLists/models"
 )
 
-func SelectTableList(path string) ([]Table) {
+func SelectTableList(path string) []Table {
 	rows := db_select(path, MainTable)
 
 	tableList := []Table{}
@@ -17,12 +17,12 @@ func SelectTableList(path string) ([]Table) {
 		if err != nil {
 			log.Fatal("ERROR: SelectTableList: ", err)
 		}
-		
+
 		oneItem.Name = unquote_str(oneItem.Name)
 
 		tableList = append(tableList, oneItem)
 	}
-	
+
 	sort.SliceStable(tableList, func(i, j int) bool {
 		return tableList[i].Name < tableList[j].Name
 	})
@@ -30,7 +30,7 @@ func SelectTableList(path string) ([]Table) {
 	return tableList
 }
 
-func SelectOneTable(path string, tableName string) ([]Item) {
+func SelectOneTable(path string, tableName string) []Item {
 	rows := db_select(path, tableName)
 
 	itemList := []Item{}
@@ -40,7 +40,7 @@ func SelectOneTable(path string, tableName string) ([]Item) {
 		if err != nil {
 			log.Fatal("ERROR: SelectOneTable: ", err)
 		}
-		
+
 		oneItem.Date = unquote_str(oneItem.Date)
 		oneItem.Name = unquote_str(oneItem.Name)
 		oneItem.Color = unquote_str(oneItem.Color)
