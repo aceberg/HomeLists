@@ -12,6 +12,10 @@ run:
 	cd src && \
 	go run .
 
+fmt:
+	cd src && \
+	go fmt ./...
+	
 go-build:
 	cd src && \
 	go build .
