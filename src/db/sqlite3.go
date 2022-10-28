@@ -3,12 +3,12 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/mattn/go-sqlite3"
 	"log"
+	_ "modernc.org/sqlite"
 )
 
 func db_exec(path string, sqlStatement string) {
-	db, _ := sql.Open("sqlite3", path)
+	db, _ := sql.Open("sqlite", path)
 	defer db.Close()
 
 	_, err := db.Exec(sqlStatement)
@@ -18,7 +18,7 @@ func db_exec(path string, sqlStatement string) {
 }
 
 func db_select(path string, table string) *sql.Rows {
-	db, _ := sql.Open("sqlite3", path)
+	db, _ := sql.Open("sqlite", path)
 	defer db.Close()
 
 	sqlStatement := `SELECT * FROM '%s';`
@@ -29,7 +29,20 @@ func db_select(path string, table string) *sql.Rows {
 		log.Fatal("ERROR: db_select: ", err)
 	}
 
-	// fmt.Println("RES (db_select): ", res)
-	// fmt.Printf("RES TYPE: %T", res)
 	return res
 }
+
+// func selectItem(path string, table string, id uint16) *sql.Rows {
+// 	db, _ := sql.Open("sqlite", path)
+// 	defer db.Close()
+
+// 	sqlStatement := `SELECT * FROM '%s' WHERE ID = '%d';`
+// 	sqlStatement = fmt.Sprintf(sqlStatement, quote_str(table), id)
+
+// 	res, err := db.Query(sqlStatement)
+// 	if err != nil {
+// 		log.Fatal("ERROR: selectItem: ", err)
+// 	}
+
+// 	return res
+// }

@@ -37,5 +37,6 @@ func Webgui(appConfig Conf) {
 	http.HandleFunc("/table/", table)
 	http.HandleFunc("/update_line/", update_line)
 	http.HandleFunc("/upload/", upload)
+	http.HandleFunc("/watchlist/", watchlist)
 	http.ListenAndServe(address, nil)
 }

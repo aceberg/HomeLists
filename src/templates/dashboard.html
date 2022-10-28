@@ -2,28 +2,44 @@
 
 <body>
     <div class="container">
-        <br>
-        <form action="/add_table/" method="post">
-            <div class="input-group w-50 mx-auto">
-                <input name="name" type="text" class="form-control text-dark" placeholder="Name" autofocus>
-                <button type="submit" class="btn btn-primary">New table</button>
-            </div>
-        </form>
-
-        <table class="table table-striped">
-            <tr>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Lines</th>
-            </tr>
-            {{ range .TableList }}
-            <tr>
-                <td><a href="table/{{ .Name }}">{{ .Name }}</a></td>
-                <td>{{ .Date }}</td>
-                <td>{{ .Lines }}</td>
-            </tr>
-            {{ end }}
-        </table>
+    <div class="row">
+        <div class="col">
+            <br>
+            <form action="/add_table/" method="post">
+                <div class="input-group">
+                    <input name="name" type="text" class="form-control text-dark" placeholder="Name" autofocus>
+                    <button type="submit" class="btn btn-primary">New table</button>
+                </div>
+            </form>
+            <br>
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Lines</th>
+                </tr>
+                {{ range .TableList }}
+                <tr>
+                    <td><a href="table/{{ .Name }}">{{ .Name }}</a></td>
+                    <td>{{ .Date }}</td>
+                    <td>{{ .Lines }}</td>
+                </tr>
+                {{ end }}
+            </table>
+        </div>
+        <div class="col">
+            <br>
+            <h3>Watchlist alerts</h3>
+                {{ range .ItemList }}
+                <div class="input-group">
+                    <input name="place" type="text" style="max-width: 25%; background-color: {{ .Color }}" class="form-control" value="{{ .Place }}" disabled>
+                    <input name="date" type="text" style="max-width: 25%; background-color: {{ .Color }}" class="form-control" value="{{ .Date }}" disabled>
+                    <input name="name" type="text" class="form-control text-dark" value="{{ .Name }}" STYLE="background-color: {{ .Color }}" disabled>
+                    <input name="count" type="text" style="max-width: 15%; background-color: {{ .Color }}" class="form-control text-dark" value="{{ .Count }}" disabled>
+                </div>
+                {{ end }}
+        </div>
+    </div>
     </div>
 
 {{ template "footer" }}

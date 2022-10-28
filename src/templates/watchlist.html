@@ -1,0 +1,30 @@
+{{ define "watchlist" }}
+
+<body>
+    <div class="container">
+            <table class="table table-striped">
+                <tr>
+                    <th>Table</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>ByDate</th>
+                    <th>Date</th>
+                    <th>ByCount</th>
+                    <th>Count</th>
+                </tr>
+                {{ range .WatchList }}
+                <tr>
+                    <td>{{ .Table }}</td>
+                    <td>{{ .ItemId }}</td>
+                    <td>{{ .Name }}</td>
+                    <td>{{ .ByDate }}</td>
+                    <td>{{ .Date }}</td>
+                    <td>{{ .ByCount }}</td>
+                    <td>{{ .Count }}</td>
+                </tr>
+                {{ end }}
+            </table>
+    </div>
+
+{{ template "footer" }}
+{{ end }}

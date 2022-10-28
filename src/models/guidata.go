@@ -10,6 +10,7 @@ type GuiData struct {
 	CurrentTable string
 	TableList    []Table
 	ItemList     []Item
+	WatchList    []WatchItem
 	OneItem      Item
 	Themes       []string
 	Colors       []LineColor

@@ -10,16 +10,30 @@ func CreateDB(path string) {
 	if _, err := os.Stat(path); err == nil {
 		log.Println("INFO: DB exists")
 	} else {
-		sqlStatement := `CREATE TABLE '%s' (
-			"ID"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-			"NAME"	TEXT NOT NULL,
-			"DATE"	TEXT NOT NULL,
-			"LINES"	INTEGER DEFAULT 0
-		);`
-		sqlStatement = fmt.Sprintf(sqlStatement, MainTable)
-		db_exec(path, sqlStatement)
-		log.Println("INFO: DB created!")
+		log.Println("INFO: DB created")
 	}
+
+	sqlStatement := `CREATE TABLE IF NOT EXISTS '%s' (
+		"ID"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+		"NAME"	TEXT NOT NULL,
+		"DATE"	TEXT NOT NULL,
+		"LINES"	INTEGER DEFAULT 0
+	);`
+	sqlStatement = fmt.Sprintf(sqlStatement, MainTable)
+	db_exec(path, sqlStatement)
+
+	sqlStatement = `CREATE TABLE IF NOT EXISTS '%s' (
+		"ID"		INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+		"TABLE"		TEXT NOT NULL,
+		"ITEMID"	INTEGER DEFAULT 0,
+		"NAME"		TEXT NOT NULL,
+		"BYDATE"	TEXT NOT NULL,
+		"DATE"		TEXT NOT NULL,
+		"BYCOUNT"	TEXT NOT NULL DEFAULT "yes",
+		"COUNT"		INTEGER DEFAULT 0
+	);`
+	sqlStatement = fmt.Sprintf(sqlStatement, WatchTable)
+	db_exec(path, sqlStatement)
 }
 
 func CreateTable(path string, tableName string) {
