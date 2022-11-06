@@ -19,3 +19,11 @@ func InsertItem(path string, table string, item Item) {
 	sqlStatement = fmt.Sprintf(sqlStatement, quote_str(table), quote_str(item.Date), quote_str(item.Name), quote_str(item.Color), item.Count, item.Place, item.Sort)
 	db_exec(path, sqlStatement)
 }
+
+func InsertWatchItem(path string, wItem WatchItem) {
+	sqlStatement := `INSERT INTO '%s' (TABLENAME, ITEMID, NAME) 
+					 VALUES ('%s','%d','%s');`
+	sqlStatement = fmt.Sprintf(sqlStatement, WatchTable, quote_str(wItem.Table), wItem.ItemId, quote_str(wItem.Name))
+
+	db_exec(path, sqlStatement)
+}

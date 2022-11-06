@@ -24,6 +24,7 @@ func Webgui(appConfig Conf) {
 
 	http.HandleFunc("/", dashboard)
 	http.HandleFunc("/add_table/", add_table)
+	http.HandleFunc("/add_to_watchlist/", add_to_watchlist)
 	http.HandleFunc("/backup/", backup)
 	http.HandleFunc("/config/", config)
 	http.HandleFunc("/dashboard_delete/", dashboard_delete)

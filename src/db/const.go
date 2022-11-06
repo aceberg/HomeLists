@@ -2,4 +2,4 @@ package db
 
 const MainTable = "FArL13ZaYIkm"
 
-const WatchTable = "afPk9Hb5LLct"
+const WatchTable = "cfPk9Hb5LLct"

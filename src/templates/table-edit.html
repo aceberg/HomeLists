@@ -3,8 +3,14 @@
 <body>
     <div class="container mt-5">
         <div class="row">
-            <h3>Sort</h3>
-            <div class="col"></div>
+            <div class="col">
+                <form action="/add_to_watchlist/" method="post">
+                    <input name="cur_table" value="{{ $.CurrentTable }}" type="hidden" class="form-control">
+                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
+                    <input name="name" value="{{ .OneItem.Name }}" type="hidden" class="form-control">
+                    <button type="submit" class="btn btn-primary">Add to Watchlist</button>
+                </form>
+            </div>
             <div class="col">
                 <form action="/sort_before/" method="post" class="input-group">
                     <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
@@ -21,6 +27,7 @@
                 </form>
             </div>
         </div>
+        <br><br>
         <h3>Edit</h3>
         <table class="table">
             <tr>

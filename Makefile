@@ -15,7 +15,11 @@ run:
 fmt:
 	cd src && \
 	go fmt ./...
-	
+
+lint:
+	cd src && \
+	golangci-lint run
+
 go-build:
 	cd src && \
 	go build .

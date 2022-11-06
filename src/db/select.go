@@ -50,23 +50,6 @@ func SelectOneTable(path string, tableName string) []Item {
 	return itemList
 }
 
-// func SelectOneItem(path string, tableName string, id uint16) Item {
-// 	rows := selectItem(path, tableName, id)
-
-// 	var oneItem Item
-// 	rows.Next()
-// 	err := rows.Scan(&oneItem.Id, &oneItem.Date, &oneItem.Name, &oneItem.Color, &oneItem.Count, &oneItem.Place, &oneItem.Sort)
-// 	if err != nil {
-// 		log.Fatal("ERROR: SelectOneItem: ", err)
-// 	}
-
-// 	oneItem.Date = unquote_str(oneItem.Date)
-// 	oneItem.Name = unquote_str(oneItem.Name)
-// 	oneItem.Color = unquote_str(oneItem.Color)
-
-// 	return oneItem
-// }
-
 func SelectWatchList(path string) []WatchItem {
 	rows := db_select(path, WatchTable)
 

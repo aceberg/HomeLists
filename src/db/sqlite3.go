@@ -31,18 +31,3 @@ func db_select(path string, table string) *sql.Rows {
 
 	return res
 }
-
-// func selectItem(path string, table string, id uint16) *sql.Rows {
-// 	db, _ := sql.Open("sqlite", path)
-// 	defer db.Close()
-
-// 	sqlStatement := `SELECT * FROM '%s' WHERE ID = '%d';`
-// 	sqlStatement = fmt.Sprintf(sqlStatement, quote_str(table), id)
-
-// 	res, err := db.Query(sqlStatement)
-// 	if err != nil {
-// 		log.Fatal("ERROR: selectItem: ", err)
-// 	}
-
-// 	return res
-// }

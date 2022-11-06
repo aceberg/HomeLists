@@ -6,6 +6,7 @@ import (
 	. "github.com/aceberg/HomeLists/models"
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 func watchlist(w http.ResponseWriter, r *http.Request) {
@@ -23,4 +24,19 @@ func watchlist(w http.ResponseWriter, r *http.Request) {
 	tmpl, _ := template.ParseFiles("templates/watchlist.html", "templates/header.html", "templates/footer.html")
 	tmpl.ExecuteTemplate(w, "header", guiData)
 	tmpl.ExecuteTemplate(w, "watchlist", guiData)
+}
+
+func add_to_watchlist(w http.ResponseWriter, r *http.Request) {
+	var wItem WatchItem
+
+	wItem.Table = r.FormValue("cur_table")
+	wItem.Name = r.FormValue("name")
+	idStr := r.FormValue("id")
+	wItem.ItemId, _ = strconv.Atoi(idStr)
+
+	db.InsertWatchItem(AppConfig.DbPath, wItem)
+
+	path := "/table/" + wItem.Table
+
+	http.Redirect(w, r, path, 302)
 }
