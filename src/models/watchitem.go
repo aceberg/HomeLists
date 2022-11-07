@@ -1,7 +1,7 @@
 package models
 
 type WatchItem struct {
-	Id      string
+	Id      int
 	Table   string
 	ItemId  int
 	Name    string

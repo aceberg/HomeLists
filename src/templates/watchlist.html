@@ -4,23 +4,55 @@
     <div class="container">
             <table class="table table-striped">
                 <tr>
+                    <th></th>
                     <th>Table</th>
                     <th>Id</th>
                     <th>Name</th>
                     <th>ByDate</th>
-                    <th>Date</th>
+                    <th>Days before Date</th>
                     <th>ByCount</th>
                     <th>Count</th>
+                    <th></th>
                 </tr>
                 {{ range .WatchList }}
                 <tr>
-                    <td>{{ .Table }}</td>
+                <form action="/update_watch/" method="post">
+                    <button type="submit" class="btn btn-primary" hidden></button>
+                    <td>
+                        <button type="submit" formaction="/del_watch/" class="btn btn-outline-danger">X</button>
+                    </td>
+                    <input name="id" type="hidden" class="form-control" value="{{ .Id }}">
+                    <td>
+                        <a href="/table/{{ .Table }}">{{ .Table }}</a>
+                    </td>
                     <td>{{ .ItemId }}</td>
-                    <td>{{ .Name }}</td>
-                    <td>{{ .ByDate }}</td>
-                    <td>{{ .Date }}</td>
-                    <td>{{ .ByCount }}</td>
-                    <td>{{ .Count }}</td>
+                    <td>
+                        <input name="name" type="text" class="form-control" value="{{ .Name }}">
+                    </td>
+                    <td>
+                        {{ if eq .ByDate "yes" }}
+                            <input name="bydate" value="{{ .ByDate }}" class="form-check-input" type="checkbox" checked>
+                        {{ else }}
+                            <input name="bydate" value="yes" class="form-check-input" type="checkbox">
+                        {{ end }}
+                    </td>
+                    <td>
+                        <input name="date" type="number" class="form-control" value="{{ .Date }}">
+                    </td>
+                    <td>
+                        {{ if eq .ByCount "yes" }}
+                            <input name="bycount" value="{{ .ByCount }}" class="form-check-input" type="checkbox" checked>
+                        {{ else }}
+                            <input name="bycount" value="yes" class="form-check-input" type="checkbox">
+                        {{ end }}
+                    </td>
+                    <td>
+                        <input name="count" type="number" class="form-control" value="{{ .Count }}">
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-outline-primary">Ok</button>
+                    </td>
+                </form>
                 </tr>
                 {{ end }}
             </table>

@@ -46,3 +46,18 @@ func UpdateTable(path string, lines uint16, table string) {
 	sqlStatement = fmt.Sprintf(sqlStatement, MainTable, lines, quote_str(table))
 	db_exec(path, sqlStatement)
 }
+
+func UpdateWatchItem(path string, wItem WatchItem) {
+	sqlStatement := `UPDATE '%s' SET 
+			NAME = '%s', BYDATE = '%s', DATE = '%s',
+			BYCOUNT = '%s', COUNT = '%d'
+			WHERE ID = '%d';`
+	sqlStatement = fmt.Sprintf(sqlStatement, WatchTable, quote_str(wItem.Name), wItem.ByDate, quote_str(wItem.Date), wItem.ByCount, wItem.Count, wItem.Id)
+	db_exec(path, sqlStatement)
+}
+
+func DeleteWatchItem(path string, id int) {
+	sqlStatement := `DELETE FROM '%s' WHERE ID = '%d';`
+	sqlStatement = fmt.Sprintf(sqlStatement, WatchTable, id)
+	db_exec(path, sqlStatement)
+}
