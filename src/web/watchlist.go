@@ -34,7 +34,19 @@ func add_to_watchlist(w http.ResponseWriter, r *http.Request) {
 	idStr := r.FormValue("id")
 	wItem.ItemId, _ = strconv.Atoi(idStr)
 
-	db.InsertWatchItem(AppConfig.DbPath, wItem)
+	watchList := db.SelectWatchList(AppConfig.DbPath)
+
+	check := true
+	for _, searchItem := range watchList {
+		if searchItem.Table == wItem.Table && searchItem.ItemId == wItem.ItemId {
+			check = false
+			break
+		}
+	}
+
+	if check {
+		db.InsertWatchItem(AppConfig.DbPath, wItem)
+	}
 
 	path := "/table/" + wItem.Table
 
