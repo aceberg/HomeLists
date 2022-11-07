@@ -1,7 +1,7 @@
 package web
 
 import (
-	"fmt"
+	// "fmt"
 	"github.com/aceberg/HomeLists/db"
 	. "github.com/aceberg/HomeLists/models"
 	"net/http"
@@ -18,11 +18,9 @@ func update_watch(w http.ResponseWriter, r *http.Request) {
 	wItem.ByDate = r.FormValue("bydate")
 	wItem.Date = r.FormValue("date")
 	wItem.ByCount = r.FormValue("bycount")
-	
+
 	countStr := r.FormValue("count")
 	wItem.Count, _ = strconv.Atoi(countStr)
-
-	fmt.Println("WATCH ITEM:", wItem)
 
 	db.UpdateWatchItem(AppConfig.DbPath, wItem)
 

@@ -7,9 +7,33 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 )
+
+func checkDate(days string, expire string) bool {
+	if expire == "" || days == "" {
+		return false
+	} else {
+		expireDate, err := time.Parse("2006-01-02", expire)
+		if err == nil {
+			daysInt, _ := strconv.Atoi(days)
+
+			nowDate := time.Now()
+			plusDate := nowDate.Add(time.Duration(daysInt) * 24 * time.Hour)
+
+			if plusDate.Before(expireDate) {
+				return false
+			} else {
+				return true
+			}
+		} else {
+			log.Println("ERROR: checkDate, wrong expire date", err)
+			return false
+		}
+	}
+}
 
 func dashboard(w http.ResponseWriter, r *http.Request) {
 	var guiData GuiData
@@ -31,13 +55,18 @@ func dashboard(w http.ResponseWriter, r *http.Request) {
 		}
 		for _, searchItem := range tableItems {
 			if uint16(watchItem.ItemId) == searchItem.Id {
-				if searchItem.Count <= uint16(watchItem.Count) && watchItem.ByCount == "yes" {
+				if watchItem.ByCount == "yes" && searchItem.Count <= uint16(watchItem.Count) {
 					searchItem.Place = tableName
 					searchItem.Color = "#ffe0b3" // orange
 
 					if watchItem.Count > 0 && searchItem.Count == 0 {
 						searchItem.Color = "#ffb3b3" // red
 					}
+
+					itemList = append(itemList, searchItem)
+				} else if watchItem.ByDate == "yes" && checkDate(watchItem.Date, searchItem.Date) {
+					searchItem.Place = tableName
+					searchItem.Color = "#ffe0b3" // orange
 
 					itemList = append(itemList, searchItem)
 				}
