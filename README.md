@@ -10,9 +10,11 @@ Count consumable supplies
 https://github.com/aceberg/HomeLists
 
 
-![Screenshot1](https://raw.githubusercontent.com/aceberg/HomeLists/main/assets/Screenshot%202022-10-06%20at%2015-13-20%20Home%20Lists%20-%20Dashboard.png)
+![Screenshot1](https://raw.githubusercontent.com/aceberg/HomeLists/main/assets/Screenshot%202022-11-07%20at%2022-26-22%20Home%20Lists%20-%20Dashboard.png)
 
-![Screenshot2](https://raw.githubusercontent.com/aceberg/HomeLists/main/assets/Screenshot%202022-10-06%20at%2015-16-48%20Home%20Lists%20-%2002-Test.png)
+![Screenshot2](https://raw.githubusercontent.com/aceberg/HomeLists/main/assets/Screenshot%202022-11-07%20at%2022-24-17%20Home%20Lists%20-%2001-Fridge.png)
+
+![Screenshot3](https://raw.githubusercontent.com/aceberg/HomeLists/main/assets/Screenshot%202022-11-07%20at%2022-27-15%20Home%20Lists%20-%2003-Supplies.png)
 
 ## Quick start
 
