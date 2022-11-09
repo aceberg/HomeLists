@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Binary release
 - Embed html templates in binary
+- Docker build from scratch (not alpine)
 
 ## [1.0.0] - 2022-11-07
 ### Added
