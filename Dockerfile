@@ -5,12 +5,10 @@ COPY src /src
 RUN cd /src && CGO_ENABLED=0 go build .
 
 
-FROM alpine
+FROM scratch
 
+WORKDIR /data/homelists
 WORKDIR /app
-
-RUN apk add --no-cache tzdata \
-    && mkdir -p /data/homelists
 
 COPY --from=builder /src/HomeLists /app/
 
