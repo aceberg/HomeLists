@@ -1,8 +1,7 @@
 # HomeLists
 
 ### ToDo
-- [ ] uint16 -> int
-- [ ] Try Dockerfile from scratch
+- [ ] uint16 -> int?
 
 ### Done
 
