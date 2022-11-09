@@ -22,7 +22,7 @@ lint:
 
 go-build:
 	cd src && \
-	go build .
+	CGO_ENABLED=0 go build -o ../HomeLists .
 
 docker-build:
 	docker build -t $(DUSER)/$(PKG_NAME) .

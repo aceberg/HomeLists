@@ -75,7 +75,7 @@ func dashboard(w http.ResponseWriter, r *http.Request) {
 	}
 	guiData.ItemList = itemList
 
-	tmpl, _ := template.ParseFiles("templates/dashboard.html", "templates/header.html", "templates/footer.html")
+	tmpl, _ := template.ParseFS(TemplHTML, "templates/dashboard.html", "templates/header.html", "templates/footer.html")
 	tmpl.ExecuteTemplate(w, "header", guiData)
 	tmpl.ExecuteTemplate(w, "dashboard", guiData)
 }

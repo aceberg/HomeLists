@@ -2,6 +2,7 @@ package web
 
 import (
 	// "fmt"
+	"embed"
 	"github.com/aceberg/HomeLists/db"
 	. "github.com/aceberg/HomeLists/models"
 	"log"
@@ -10,6 +11,9 @@ import (
 
 var AppConfig Conf
 var TableList []Table
+
+//go:embed templates/*
+var TemplHTML embed.FS
 
 func Webgui(appConfig Conf) {
 

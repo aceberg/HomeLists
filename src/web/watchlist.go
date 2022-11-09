@@ -21,7 +21,7 @@ func watchlist(w http.ResponseWriter, r *http.Request) {
 
 	// fmt.Println("WL:", guiData.WatchList)
 
-	tmpl, _ := template.ParseFiles("templates/watchlist.html", "templates/header.html", "templates/footer.html")
+	tmpl, _ := template.ParseFS(TemplHTML, "templates/watchlist.html", "templates/header.html", "templates/footer.html")
 	tmpl.ExecuteTemplate(w, "header", guiData)
 	tmpl.ExecuteTemplate(w, "watchlist", guiData)
 }

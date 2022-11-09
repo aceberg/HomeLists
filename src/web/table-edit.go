@@ -44,7 +44,7 @@ func edit_line(w http.ResponseWriter, r *http.Request) {
 	guiData.OneItem.Count = uint16(count)
 	guiData.OneItem.Sort = uint16(sort)
 
-	tmpl, _ := template.ParseFiles("templates/table-edit.html", "templates/header.html", "templates/footer.html")
+	tmpl, _ := template.ParseFS(TemplHTML, "templates/table-edit.html", "templates/header.html", "templates/footer.html")
 	tmpl.ExecuteTemplate(w, "header", guiData)
 	tmpl.ExecuteTemplate(w, "table-edit", guiData)
 }

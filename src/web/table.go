@@ -41,7 +41,7 @@ func table(w http.ResponseWriter, r *http.Request) {
 		guiData.Config = AppConfig
 		guiData.TableList = TableList
 
-		tmpl, _ := template.ParseFiles("templates/table.html", "templates/header.html", "templates/footer.html")
+		tmpl, _ := template.ParseFS(TemplHTML, "templates/table.html", "templates/header.html", "templates/footer.html")
 		tmpl.ExecuteTemplate(w, "header", guiData)
 		tmpl.ExecuteTemplate(w, "table", guiData)
 	} else {
