@@ -5,6 +5,8 @@ import (
 	"github.com/aceberg/HomeLists/conf"
 	"github.com/aceberg/HomeLists/db"
 	"github.com/aceberg/HomeLists/web"
+
+	_ "time/tzdata"
 )
 
 func main() {
