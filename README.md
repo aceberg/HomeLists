@@ -43,6 +43,14 @@ Configuration can be done through config file or environment variables
 
 Config file path is `/data/homelists/config`. All variables could be set there.
 
+## Support
+
+If you like this app, please support me
+- BTC: bc1qj59rxmfvanvqqltq9t73qls4su3xrvwuv3sxhr
+- ETH: 0x276124c218aa8110F96989AA1f6f2Bb960C234B7
+- USDT(ETH Network): 0x276124c218aa8110F96989AA1f6f2Bb960C234B7
+
+
 ## Thanks
 - All go packages listed in [dependencies](https://github.com/aceberg/go-homelists/network/dependencies)
 - [Bootstrap](https://getbootstrap.com/)
