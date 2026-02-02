@@ -52,13 +52,16 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 	sortStr := r.FormValue("sort")
 	minus := r.FormValue("minus")
 
-	if idStr == "" || countStr == "" {
+	if idStr == "" {
 		fmt.Fprintf(w, "No data!")
 	} else {
 		id, _ := strconv.Atoi(idStr)
-		count, _ := strconv.Atoi(countStr)
+		count, err := strconv.Atoi(countStr)
 		sort, _ := strconv.Atoi(sortStr)
 
+		if err != nil {
+			count = 0
+		}
 		if minus == "yes" {
 			count = count - 1
 		}

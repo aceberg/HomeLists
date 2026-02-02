@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+
 	_ "modernc.org/sqlite"
 )
 
@@ -30,4 +31,20 @@ func db_select(path string, table string) *sql.Rows {
 	}
 
 	return res
+}
+
+func db_select_count(path string, table string, id uint16) uint16 {
+	db, _ := sql.Open("sqlite", path)
+	defer db.Close()
+
+	sqlStatement := `SELECT "COUNT" FROM '%s' WHERE ID = ?;`
+	sqlStatement = fmt.Sprintf(sqlStatement, quote_str(table))
+
+	var count uint16
+	err := db.QueryRow(sqlStatement, id).Scan(&count)
+	if err != nil {
+		log.Fatal("ERROR: db_select_count: ", err)
+	}
+
+	return count
 }

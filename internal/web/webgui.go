@@ -46,5 +46,8 @@ func Webgui(appConfig Conf) {
 	http.HandleFunc("/update_watch/", update_watch)
 	http.HandleFunc("/upload/", upload)
 	http.HandleFunc("/watchlist/", watchlist)
+
+	http.HandleFunc("/api_minus/", api_minus)
+
 	http.ListenAndServe(address, nil)
 }
