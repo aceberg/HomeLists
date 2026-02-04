@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
  
 
-## [1.0.3] - 2026-02-03
+## [1.0.3] - 2026-02-04
 ### Added
 - Show ID on Item page
 - Handler `/api_minus/`
