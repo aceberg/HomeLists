@@ -1,0 +1,41 @@
+version: 2
+project_name: homelists
+builds:
+  - main: ./cmd/HomeLists/
+    binary: homelists
+    id: default
+    env: [CGO_ENABLED=0]
+    goos:
+      - linux
+    goarch:
+      - 386
+      - amd64
+      - arm
+      - arm64
+    goarm:
+      - "5"
+      - "6"
+      - "7"
+
+nfpms:
+  - id: systemd
+    formats:
+    - deb
+    - rpm
+    - apk
+    maintainer: aceberg <aceberg_a@proton.me>
+    description: Count consumable supplies
+    homepage: https://github.com/aceberg/homelists
+    license: MIT
+    section: utils
+
+archives:
+  - files:
+    - LICENSE
+    wrap_in_directory: true
+    format_overrides:
+    - goos: windows
+      format: zip
+
+checksum:
+  name_template: "checksums.txt"

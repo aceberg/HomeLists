@@ -1,7 +1,0 @@
-#!/bin/bash
-
-cd cmd/HomeLists && CGO_ENABLED=0 go build -o ../../HomeLists .
-
-cd ../..
-chmod +x HomeLists
-tar cvzf HomeLists.tar.gz HomeLists
