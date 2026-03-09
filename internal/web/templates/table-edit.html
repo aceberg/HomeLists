@@ -43,7 +43,7 @@
             <form action="/update_line/" method="post">
                 <tr>
                     <td>ID</td>
-                    <td>{{ .OneItem.Id }}</td>
+                    <td>{{ .OneItem.Id }}<input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control"></td>
                 </tr>
                     <tr>
                         <td>Date</td>

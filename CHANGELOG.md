@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
  
 
+## [1.0.4] - 2026-03-09
+### Fixed
+- `No data!` error on item update
+
 ## [1.0.3] - 2026-02-04
 ### Added
 - Show ID on Item page
