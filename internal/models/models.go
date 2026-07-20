@@ -1,10 +1,12 @@
 package models
 
 type Conf struct {
-	DbPath  string
-	GuiIP   string
-	GuiPort string
-	Theme   string
+	DbPath   string
+	GuiIP    string
+	GuiPort  string
+	Theme    string
+	Color    string
+	NodePath string
 }
 
 type Item struct {

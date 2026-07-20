@@ -36,8 +36,10 @@ Configuration can be done through config file or environment variables
 | --------  | ----------- | ------- |
 | DBPATH    | Path to Database | /data/homelists/sqlite.db |
 | GUIPORT   | Port for web GUI | 8842 |
+| NODEPATH  | Path to local [Node Bootstrap](https://github.com/aceberg/my-dockerfiles/tree/main/node-bootstrap) modules | |
 | THEME | Any theme name from https://bootswatch.com in lowcase | superhero |
-| TZ | Set your timezone for correct time | "" |
+| COLOR | Color mode: light or dark (works only with NODEPATH) | light |
+| TZ | Set your timezone for correct time |  |
 
 ## Config file
 

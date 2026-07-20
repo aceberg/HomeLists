@@ -12,6 +12,8 @@ func GetConfig() (config Conf) {
 	viper.SetDefault("GUI_IP", "0.0.0.0")
 	viper.SetDefault("GUI_PORT", "8842")
 	viper.SetDefault("THEME", "superhero")
+	viper.SetDefault("COLOR", "light")
+	viper.SetDefault("NODEPATH", "")
 
 	viper.SetConfigFile(configPath)
 	viper.SetConfigType("env")
@@ -23,6 +25,8 @@ func GetConfig() (config Conf) {
 	config.GuiIP = viper.Get("GUI_IP").(string)
 	config.GuiPort = viper.Get("GUI_PORT").(string)
 	config.Theme = viper.Get("THEME").(string)
+	config.Color = viper.Get("COLOR").(string)
+	config.NodePath = viper.Get("NODEPATH").(string)
 
 	return config
 }
