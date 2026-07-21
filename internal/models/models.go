@@ -10,26 +10,26 @@ type Conf struct {
 }
 
 type Item struct {
-	Id    uint16
+	ID    int
 	Date  string
 	Name  string
 	Color string
-	Count uint16
+	Count int
 	Place string
-	Sort  uint16
+	Sort  int
 }
 
 type Table struct {
-	Id    string
+	ID    string
 	Name  string
 	Date  string
-	Lines uint16
+	Lines int
 }
 
 type WatchItem struct {
-	Id      int
+	ID      int
 	Table   string
-	ItemId  int
+	ItemID  int
 	Name    string
 	ByDate  string
 	Date    string

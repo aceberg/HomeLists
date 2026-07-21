@@ -1,22 +1,21 @@
 package web
 
 import (
-	// "fmt"
 	"embed"
 	"log"
 	"net/http"
 
 	"github.com/aceberg/HomeLists/internal/db"
-	. "github.com/aceberg/HomeLists/internal/models"
+	"github.com/aceberg/HomeLists/internal/models"
 )
 
-var AppConfig Conf
-var TableList []Table
+var AppConfig models.Conf
+var TableList []models.Table
 
 //go:embed templates/*
 var TemplHTML embed.FS
 
-func Webgui(appConfig Conf) {
+func Webgui(appConfig models.Conf) {
 
 	AppConfig = appConfig
 	TableList = db.SelectTableList(AppConfig.DbPath)

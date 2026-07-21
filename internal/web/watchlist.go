@@ -1,17 +1,16 @@
 package web
 
 import (
-	// "fmt"
 	"html/template"
 	"net/http"
 	"strconv"
 
 	"github.com/aceberg/HomeLists/internal/db"
-	. "github.com/aceberg/HomeLists/internal/models"
+	"github.com/aceberg/HomeLists/internal/models"
 )
 
 func watchlist(w http.ResponseWriter, r *http.Request) {
-	var guiData GuiData
+	var guiData models.GuiData
 
 	TableList = db.SelectTableList(AppConfig.DbPath)
 
@@ -20,26 +19,24 @@ func watchlist(w http.ResponseWriter, r *http.Request) {
 	guiData.CurrentTable = "Watchlist"
 	guiData.WatchList = db.SelectWatchList(AppConfig.DbPath)
 
-	// fmt.Println("WL:", guiData.WatchList)
-
 	tmpl, _ := template.ParseFS(TemplHTML, "templates/watchlist.html", "templates/header.html", "templates/footer.html")
 	tmpl.ExecuteTemplate(w, "header", guiData)
 	tmpl.ExecuteTemplate(w, "watchlist", guiData)
 }
 
 func add_to_watchlist(w http.ResponseWriter, r *http.Request) {
-	var wItem WatchItem
+	var wItem models.WatchItem
 
 	wItem.Table = r.FormValue("cur_table")
 	wItem.Name = r.FormValue("name")
 	idStr := r.FormValue("id")
-	wItem.ItemId, _ = strconv.Atoi(idStr)
+	wItem.ItemID, _ = strconv.Atoi(idStr)
 
 	watchList := db.SelectWatchList(AppConfig.DbPath)
 
 	check := true
 	for _, searchItem := range watchList {
-		if searchItem.Table == wItem.Table && searchItem.ItemId == wItem.ItemId {
+		if searchItem.Table == wItem.Table && searchItem.ItemID == wItem.ItemID {
 			check = false
 			break
 		}
@@ -51,5 +48,5 @@ func add_to_watchlist(w http.ResponseWriter, r *http.Request) {
 
 	path := "/table/" + wItem.Table
 
-	http.Redirect(w, r, path, 302)
+	http.Redirect(w, r, path, http.StatusFound)
 }

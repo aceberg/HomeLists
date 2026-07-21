@@ -1,14 +1,11 @@
 package web
 
 import (
-	// "fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/aceberg/HomeLists/internal/db"
-
-	// . "github.com/aceberg/HomeLists/models"
-	"strconv"
 )
 
 func dashboard_delete(w http.ResponseWriter, r *http.Request) {
@@ -17,12 +14,12 @@ func dashboard_delete(w http.ResponseWriter, r *http.Request) {
 
 	id, _ := strconv.Atoi(idStr)
 
-	db.DeleteTable(AppConfig.DbPath, name, uint16(id))
+	db.DeleteTable(AppConfig.DbPath, name, id)
 	TableList = db.SelectTableList(AppConfig.DbPath)
 
 	log.Println("INFO: Deleted table", name)
 
-	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+	http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
 }
 
 func dashboard_rename(w http.ResponseWriter, r *http.Request) {
@@ -31,16 +28,16 @@ func dashboard_rename(w http.ResponseWriter, r *http.Request) {
 
 	oldName := ""
 	for _, oneTable := range TableList {
-		if oneTable.Id == idStr {
+		if oneTable.ID == idStr {
 			oldName = oneTable.Name
 		}
 	}
 	id, _ := strconv.Atoi(idStr)
 
-	db.RenameTable(AppConfig.DbPath, oldName, name, uint16(id))
+	db.RenameTable(AppConfig.DbPath, oldName, name, id)
 	TableList = db.SelectTableList(AppConfig.DbPath)
 
 	log.Println("INFO: Updated table name:", oldName, "->", name)
 
-	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+	http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
 }

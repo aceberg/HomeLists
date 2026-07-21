@@ -1,7 +1,6 @@
 package web
 
 import (
-	// "fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -10,7 +9,7 @@ import (
 	"time"
 
 	"github.com/aceberg/HomeLists/internal/db"
-	. "github.com/aceberg/HomeLists/internal/models"
+	"github.com/aceberg/HomeLists/internal/models"
 )
 
 func checkDate(days string, expire string) bool {
@@ -37,7 +36,7 @@ func checkDate(days string, expire string) bool {
 }
 
 func dashboard(w http.ResponseWriter, r *http.Request) {
-	var guiData GuiData
+	var guiData models.GuiData
 
 	TableList = db.SelectTableList(AppConfig.DbPath)
 	watchList := db.SelectWatchList(AppConfig.DbPath)
@@ -46,17 +45,17 @@ func dashboard(w http.ResponseWriter, r *http.Request) {
 	guiData.TableList = TableList
 	guiData.CurrentTable = "Dashboard"
 
-	itemList := []Item{}
+	itemList := []models.Item{}
 	tableName := ""
-	tableItems := []Item{}
+	tableItems := []models.Item{}
 	for _, watchItem := range watchList {
 		if tableName != watchItem.Table {
 			tableName = watchItem.Table
 			tableItems = db.SelectOneTable(AppConfig.DbPath, tableName)
 		}
 		for _, searchItem := range tableItems {
-			if uint16(watchItem.ItemId) == searchItem.Id {
-				if watchItem.ByCount == "yes" && searchItem.Count <= uint16(watchItem.Count) {
+			if watchItem.ItemID == searchItem.ID {
+				if watchItem.ByCount == "yes" && searchItem.Count <= watchItem.Count {
 					searchItem.Place = tableName
 					searchItem.Color = "#ffe0b3" // orange
 
@@ -82,7 +81,7 @@ func dashboard(w http.ResponseWriter, r *http.Request) {
 }
 
 func add_table(w http.ResponseWriter, r *http.Request) {
-	var newTable Table
+	var newTable models.Table
 	newTable.Name = r.FormValue("name")
 
 	check := strings.ContainsAny(newTable.Name, "<>?/#&'\"")
@@ -98,5 +97,5 @@ func add_table(w http.ResponseWriter, r *http.Request) {
 		log.Println("ERROR: incorrect table name", newTable.Name)
 	}
 
-	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+	http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
 }

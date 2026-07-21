@@ -1,19 +1,18 @@
 package web
 
 import (
-	// "fmt"
 	"net/http"
 	"strconv"
 
 	"github.com/aceberg/HomeLists/internal/db"
-	. "github.com/aceberg/HomeLists/internal/models"
+	"github.com/aceberg/HomeLists/internal/models"
 )
 
 func update_watch(w http.ResponseWriter, r *http.Request) {
-	var wItem WatchItem
+	var wItem models.WatchItem
 
 	idStr := r.FormValue("id")
-	wItem.Id, _ = strconv.Atoi(idStr)
+	wItem.ID, _ = strconv.Atoi(idStr)
 
 	wItem.Name = r.FormValue("name")
 	wItem.ByDate = r.FormValue("bydate")
@@ -25,7 +24,7 @@ func update_watch(w http.ResponseWriter, r *http.Request) {
 
 	db.UpdateWatchItem(AppConfig.DbPath, wItem)
 
-	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+	http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
 }
 
 func del_watch(w http.ResponseWriter, r *http.Request) {
@@ -35,5 +34,5 @@ func del_watch(w http.ResponseWriter, r *http.Request) {
 
 	db.DeleteWatchItem(AppConfig.DbPath, id)
 
-	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+	http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
 }

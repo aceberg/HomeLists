@@ -6,24 +6,23 @@ import (
 	"strconv"
 
 	"github.com/aceberg/HomeLists/internal/db"
-	. "github.com/aceberg/HomeLists/internal/models"
+	"github.com/aceberg/HomeLists/internal/models"
 )
 
 func del_line(w http.ResponseWriter, r *http.Request) {
 	currentTable := r.FormValue("cur_table")
 
-	idInt, _ := strconv.Atoi(r.FormValue("id"))
-	id := uint16(idInt)
+	id, _ := strconv.Atoi(r.FormValue("id"))
 
 	db.DeleteItem(AppConfig.DbPath, currentTable, id)
 
 	path := "/table/" + currentTable
 
-	http.Redirect(w, r, path, 302)
+	http.Redirect(w, r, path, http.StatusFound)
 }
 
 func new_line(w http.ResponseWriter, r *http.Request) {
-	var item Item
+	var item models.Item
 
 	currentTable := r.FormValue("cur_table")
 	item.Place = r.FormValue("place")
@@ -32,14 +31,14 @@ func new_line(w http.ResponseWriter, r *http.Request) {
 
 	itemList := db.SelectOneTable(AppConfig.DbPath, currentTable)
 	item = itemList[len(itemList)-1]
-	item.Sort = item.Id
+	item.Sort = item.ID
 	db.UpdateItem(AppConfig.DbPath, currentTable, item)
 
-	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+	http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
 }
 
 func update_line(w http.ResponseWriter, r *http.Request) {
-	var item Item
+	var item models.Item
 
 	currentTable := r.FormValue("cur_table")
 
@@ -69,14 +68,14 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 			count = 0
 		}
 
-		item.Id = uint16(id)
-		item.Count = uint16(count)
-		item.Sort = uint16(sort)
+		item.ID = id
+		item.Count = count
+		item.Sort = sort
 
 		db.UpdateItem(AppConfig.DbPath, currentTable, item)
 
 		path := "/table/" + currentTable
 
-		http.Redirect(w, r, path, 302)
+		http.Redirect(w, r, path, http.StatusFound)
 	}
 }

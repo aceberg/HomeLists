@@ -2,6 +2,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2026-07-
+### Changed
+- Upd to `go 1.26.4`
+- Old code fixes (uint16->int)
+
 ## [1.0.5] - 2026-07-21
 ### Added 
 - Local Node Path

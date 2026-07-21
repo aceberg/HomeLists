@@ -1,20 +1,19 @@
 package db
 
 import (
-	// "fmt"
 	"log"
 	"sort"
 
-	. "github.com/aceberg/HomeLists/internal/models"
+	"github.com/aceberg/HomeLists/internal/models"
 )
 
-func SelectTableList(path string) []Table {
+func SelectTableList(path string) []models.Table {
 	rows := db_select(path, MainTable)
 
-	tableList := []Table{}
+	tableList := []models.Table{}
 	for rows.Next() {
-		var oneItem Table
-		err := rows.Scan(&oneItem.Id, &oneItem.Name, &oneItem.Date, &oneItem.Lines)
+		var oneItem models.Table
+		err := rows.Scan(&oneItem.ID, &oneItem.Name, &oneItem.Date, &oneItem.Lines)
 		if err != nil {
 			log.Fatal("ERROR: SelectTableList: ", err)
 		}
@@ -31,13 +30,13 @@ func SelectTableList(path string) []Table {
 	return tableList
 }
 
-func SelectOneTable(path string, tableName string) []Item {
+func SelectOneTable(path string, tableName string) []models.Item {
 	rows := db_select(path, tableName)
 
-	itemList := []Item{}
+	itemList := []models.Item{}
 	for rows.Next() {
-		var oneItem Item
-		err := rows.Scan(&oneItem.Id, &oneItem.Date, &oneItem.Name, &oneItem.Color, &oneItem.Count, &oneItem.Place, &oneItem.Sort)
+		var oneItem models.Item
+		err := rows.Scan(&oneItem.ID, &oneItem.Date, &oneItem.Name, &oneItem.Color, &oneItem.Count, &oneItem.Place, &oneItem.Sort)
 		if err != nil {
 			log.Fatal("ERROR: SelectOneTable: ", err)
 		}
@@ -51,13 +50,13 @@ func SelectOneTable(path string, tableName string) []Item {
 	return itemList
 }
 
-func SelectWatchList(path string) []WatchItem {
+func SelectWatchList(path string) []models.WatchItem {
 	rows := db_select(path, WatchTable)
 
-	watchList := []WatchItem{}
+	watchList := []models.WatchItem{}
 	for rows.Next() {
-		var oneItem WatchItem
-		err := rows.Scan(&oneItem.Id, &oneItem.Table, &oneItem.ItemId, &oneItem.Name, &oneItem.ByDate, &oneItem.Date, &oneItem.ByCount, &oneItem.Count)
+		var oneItem models.WatchItem
+		err := rows.Scan(&oneItem.ID, &oneItem.Table, &oneItem.ItemID, &oneItem.Name, &oneItem.ByDate, &oneItem.Date, &oneItem.ByCount, &oneItem.Count)
 		if err != nil {
 			log.Fatal("ERROR: SelectWatchList: ", err)
 		}

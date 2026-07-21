@@ -8,11 +8,11 @@ import (
 	"strings"
 
 	"github.com/aceberg/HomeLists/internal/db"
-	. "github.com/aceberg/HomeLists/internal/models"
+	"github.com/aceberg/HomeLists/internal/models"
 )
 
 func table(w http.ResponseWriter, r *http.Request) {
-	var guiData GuiData
+	var guiData models.GuiData
 
 	TableList = db.SelectTableList(AppConfig.DbPath)
 
@@ -36,7 +36,7 @@ func table(w http.ResponseWriter, r *http.Request) {
 		})
 
 		lines := len(guiData.ItemList)
-		db.UpdateTable(AppConfig.DbPath, uint16(lines), guiData.CurrentTable)
+		db.UpdateTable(AppConfig.DbPath, lines, guiData.CurrentTable)
 		TableList = db.SelectTableList(AppConfig.DbPath)
 
 		guiData.Config = AppConfig
@@ -46,6 +46,6 @@ func table(w http.ResponseWriter, r *http.Request) {
 		tmpl.ExecuteTemplate(w, "header", guiData)
 		tmpl.ExecuteTemplate(w, "table", guiData)
 	} else {
-		http.Redirect(w, r, "/", 302)
+		http.Redirect(w, r, "/", http.StatusFound)
 	}
 }

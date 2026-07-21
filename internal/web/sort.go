@@ -1,12 +1,11 @@
 package web
 
 import (
-	// "fmt"
 	"net/http"
 	"strconv"
 
 	"github.com/aceberg/HomeLists/internal/db"
-	. "github.com/aceberg/HomeLists/internal/models"
+	"github.com/aceberg/HomeLists/internal/models"
 )
 
 func sort_by_id(w http.ResponseWriter, r *http.Request) {
@@ -16,17 +15,17 @@ func sort_by_id(w http.ResponseWriter, r *http.Request) {
 	itemList := db.SelectOneTable(AppConfig.DbPath, currentTable)
 
 	for _, oneItem := range itemList {
-		oneItem.Sort = oneItem.Id
+		oneItem.Sort = oneItem.ID
 		db.UpdateItem(AppConfig.DbPath, currentTable, oneItem)
 	}
 
 	path := "/table/" + currentTable
 
-	http.Redirect(w, r, path, 302)
+	http.Redirect(w, r, path, http.StatusFound)
 }
 
 func sort_before(w http.ResponseWriter, r *http.Request) {
-	var item Item
+	var item models.Item
 
 	currentTable := r.FormValue("cur_table")
 	idStr := r.FormValue("id")
@@ -39,18 +38,18 @@ func sort_before(w http.ResponseWriter, r *http.Request) {
 		itemList := db.SelectOneTable(AppConfig.DbPath, currentTable)
 
 		for _, oneItem := range itemList {
-			if oneItem.Id == uint16(id) {
+			if oneItem.ID == id {
 				item = oneItem
 			}
 		}
 
 		for _, oneItem := range itemList {
-			if oneItem.Sort == uint16(before) {
+			if oneItem.Sort == before {
 				item.Sort = oneItem.Sort
 				oneItem.Sort = oneItem.Sort + 1
 				db.UpdateItem(AppConfig.DbPath, currentTable, oneItem)
 			}
-			if oneItem.Sort > uint16(before) {
+			if oneItem.Sort > before {
 				oneItem.Sort = oneItem.Sort + 1
 				db.UpdateItem(AppConfig.DbPath, currentTable, oneItem)
 			}
@@ -60,5 +59,5 @@ func sort_before(w http.ResponseWriter, r *http.Request) {
 
 	path := "/table/" + currentTable
 
-	http.Redirect(w, r, path, 302)
+	http.Redirect(w, r, path, http.StatusFound)
 }

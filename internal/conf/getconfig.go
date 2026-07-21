@@ -1,13 +1,14 @@
 package conf
 
 import (
-	. "github.com/aceberg/HomeLists/internal/models"
 	"github.com/spf13/viper"
+
+	"github.com/aceberg/HomeLists/internal/models"
 )
 
 const configPath = "/data/homelists/config"
 
-func GetConfig() (config Conf) {
+func GetConfig() (config models.Conf) {
 	viper.SetDefault("DB_PATH", "/data/homelists/sqlite.db")
 	viper.SetDefault("GUI_IP", "0.0.0.0")
 	viper.SetDefault("GUI_PORT", "8842")

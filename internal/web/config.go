@@ -5,11 +5,11 @@ import (
 	"net/http"
 
 	"github.com/aceberg/HomeLists/internal/conf"
-	. "github.com/aceberg/HomeLists/internal/models"
+	"github.com/aceberg/HomeLists/internal/models"
 )
 
 func config(w http.ResponseWriter, r *http.Request) {
-	var guiData GuiData
+	var guiData models.GuiData
 
 	guiData.Config = AppConfig
 	guiData.TableList = TableList
@@ -27,5 +27,5 @@ func save_config(w http.ResponseWriter, r *http.Request) {
 	AppConfig.Theme = r.FormValue("theme")
 	conf.WriteConfig(AppConfig.Theme)
 
-	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+	http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
 }

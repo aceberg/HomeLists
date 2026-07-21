@@ -13,6 +13,6 @@ func api_minus(w http.ResponseWriter, r *http.Request) {
 
 	id, err := strconv.Atoi(idStr)
 	if err == nil {
-		db.MinusItem(AppConfig.DbPath, table, uint16(id))
+		db.MinusItem(AppConfig.DbPath, table, id)
 	}
 }

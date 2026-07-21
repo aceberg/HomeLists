@@ -1,11 +1,10 @@
 package db
 
 import (
-	// "log"
 	"fmt"
 )
 
-func MinusItem(path string, table string, id uint16) {
+func MinusItem(path string, table string, id int) {
 
 	count := db_select_count(path, table, id)
 

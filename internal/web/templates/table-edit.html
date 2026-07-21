@@ -6,7 +6,7 @@
             <div class="col">
                 <form action="/add_to_watchlist/" method="post">
                     <input name="cur_table" value="{{ $.CurrentTable }}" type="hidden" class="form-control">
-                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
+                    <input name="id" value="{{ .OneItem.ID }}" type="hidden" class="form-control">
                     <input name="name" value="{{ .OneItem.Name }}" type="hidden" class="form-control">
                     <button type="submit" class="btn btn-primary">Add to Watchlist</button>
                 </form>
@@ -14,7 +14,7 @@
             <div class="col">
                 <form action="/sort_before/" method="post" class="input-group">
                     <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
-                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
+                    <input name="id" value="{{ .OneItem.ID }}" type="hidden" class="form-control">
                     <button type="submit" class="btn btn-primary">Place before</button>
                     <input name="before" type="number" class="form-control" style="max-width: 50%" placeholder="Sort number">
                 </form>
@@ -22,7 +22,7 @@
             <div class="col">
                 <form action="/sort_by_id/" method="post">
                     <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
-                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
+                    <input name="id" value="{{ .OneItem.ID }}" type="hidden" class="form-control">
                     <button type="submit" class="btn btn-warning">Sort table by ID</button>
                 </form>
             </div>
@@ -36,14 +36,14 @@
                 </a></td>
                 <td><form action="/del_line/" method="post">
                     <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
-                    <input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control">
+                    <input name="id" value="{{ .OneItem.ID }}" type="hidden" class="form-control">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form></td>
             </tr>
             <form action="/update_line/" method="post">
                 <tr>
                     <td>ID</td>
-                    <td>{{ .OneItem.Id }}<input name="id" value="{{ .OneItem.Id }}" type="hidden" class="form-control"></td>
+                    <td>{{ .OneItem.ID }}<input name="id" value="{{ .OneItem.ID }}" type="hidden" class="form-control"></td>
                 </tr>
                     <tr>
                         <td>Date</td>

@@ -4,7 +4,7 @@
 <br/>
 
 [![Docker](https://github.com/aceberg/HomeLists/actions/workflows/main-docker-all.yml/badge.svg)](https://github.com/aceberg/HomeLists/actions/workflows/main-docker-all.yml)
-[![Binary-release](https://github.com/aceberg/HomeLists/actions/workflows/release.yml/badge.svg)](https://github.com/aceberg/HomeLists/actions/workflows/release.yml)
+[![Binary-release](https://github.com/aceberg/HomeLists/actions/workflows/binary-release.yml/badge.svg)](https://github.com/aceberg/HomeLists/actions/workflows/binary-release.yml)
 ![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/aceberg/homelists)
 
 Count consumable supplies    

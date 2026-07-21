@@ -30,7 +30,7 @@ func backup(w http.ResponseWriter, r *http.Request) {
 		io.Copy(newFile, sourceFile)
 		log.Println("INFO: Backup file created", AppConfig.DbPath+backupString)
 
-		http.Redirect(w, r, r.Header.Get("Referer"), 302)
+		http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
 
 	case "download":
 		filename := "HomeLists-backup-" + currentTime.Format("2006-01-02T15-04") + ".db"
@@ -39,7 +39,7 @@ func backup(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/octet-stream")
 		http.ServeFile(w, r, AppConfig.DbPath)
 	default:
-		http.Redirect(w, r, "/config/", 302)
+		http.Redirect(w, r, "/config/", http.StatusFound)
 	}
 }
 
@@ -56,5 +56,5 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		io.Copy(newFile, uploadFile)
 		log.Println("INFO: DB uploaded from backup")
 	}
-	http.Redirect(w, r, r.Header.Get("Referer"), 302)
+	http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
 }

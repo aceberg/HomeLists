@@ -1,12 +1,11 @@
 package main
 
 import (
-	// "fmt"
+	_ "time/tzdata"
+
 	"github.com/aceberg/HomeLists/internal/conf"
 	"github.com/aceberg/HomeLists/internal/db"
 	"github.com/aceberg/HomeLists/internal/web"
-
-	_ "time/tzdata"
 )
 
 func main() {

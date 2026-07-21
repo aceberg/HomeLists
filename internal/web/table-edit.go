@@ -1,19 +1,17 @@
 package web
 
 import (
-	// "fmt"
 	"html/template"
 	"net/http"
 	"strconv"
 
-	// "github.com/aceberg/HomeLists/db"
-	. "github.com/aceberg/HomeLists/internal/models"
+	"github.com/aceberg/HomeLists/internal/models"
 )
 
 func edit_line(w http.ResponseWriter, r *http.Request) {
-	var guiData GuiData
+	var guiData models.GuiData
 
-	guiData.Colors = []LineColor{
+	guiData.Colors = []models.LineColor{
 		{Name: "Blue", Code: "#b3d1ff"},
 		{Name: "Cyan", Code: "#b3ffff"},
 		{Name: "Green", Code: "#b3ffb3"},
@@ -41,9 +39,9 @@ func edit_line(w http.ResponseWriter, r *http.Request) {
 	count, _ := strconv.Atoi(countStr)
 	sort, _ := strconv.Atoi(sortStr)
 
-	guiData.OneItem.Id = uint16(id)
-	guiData.OneItem.Count = uint16(count)
-	guiData.OneItem.Sort = uint16(sort)
+	guiData.OneItem.ID = id
+	guiData.OneItem.Count = count
+	guiData.OneItem.Sort = sort
 
 	tmpl, _ := template.ParseFS(TemplHTML, "templates/table-edit.html", "templates/header.html", "templates/footer.html")
 	tmpl.ExecuteTemplate(w, "header", guiData)
