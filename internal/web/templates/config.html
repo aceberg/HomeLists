@@ -16,20 +16,6 @@
                 </form>
             </div>
             <div class="col">
-                <h3>Backup</h3>
-                <a href="/backup/create/"><button type="submit" class="btn btn-primary">Create DB backup on disk</button></a>
-                &nbsp;&nbsp;
-                <a href="/backup/download"><button type="submit" class="btn btn-success">Download</button></a>
-                <br>
-                <br>
-                <p>Upload Database from file</p>
-                <form enctype="multipart/form-data" action="/upload/" method="post">
-                    <input type="file" name="dbfile" class="form-control text-dark"/>
-                    <button type="submit" class="btn btn-danger">Upload</button>
-                </form>
-            </div>
-        </div>
-        <div class="row">
             <h3>Edit or delete table</h3>
             {{ range .TableList }}
                 <form action="/dashboard_rename/" method="post">
@@ -41,7 +27,8 @@
                         <button type="submit" class="btn btn-primary">Rename</button>
                     </div>
                 </form>
-            {{ end }}
+            {{ end }}    
+            </div>
         </div>
     </div>
         

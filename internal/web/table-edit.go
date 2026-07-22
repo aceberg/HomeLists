@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/aceberg/HomeLists/internal/check"
 	"github.com/aceberg/HomeLists/internal/models"
 )
 
@@ -44,6 +45,8 @@ func edit_line(w http.ResponseWriter, r *http.Request) {
 	guiData.OneItem.Sort = sort
 
 	tmpl, _ := template.ParseFS(TemplHTML, "templates/table-edit.html", "templates/header.html", "templates/footer.html")
-	tmpl.ExecuteTemplate(w, "header", guiData)
-	tmpl.ExecuteTemplate(w, "table-edit", guiData)
+	err := tmpl.ExecuteTemplate(w, "header", guiData)
+	check.IfError(err)
+	err = tmpl.ExecuteTemplate(w, "table-edit", guiData)
+	check.IfError(err)
 }

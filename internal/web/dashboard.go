@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/aceberg/HomeLists/internal/check"
 	"github.com/aceberg/HomeLists/internal/db"
 	"github.com/aceberg/HomeLists/internal/models"
 )
@@ -76,8 +77,10 @@ func dashboard(w http.ResponseWriter, r *http.Request) {
 	guiData.ItemList = itemList
 
 	tmpl, _ := template.ParseFS(TemplHTML, "templates/dashboard.html", "templates/header.html", "templates/footer.html")
-	tmpl.ExecuteTemplate(w, "header", guiData)
-	tmpl.ExecuteTemplate(w, "dashboard", guiData)
+	err := tmpl.ExecuteTemplate(w, "header", guiData)
+	check.IfError(err)
+	err = tmpl.ExecuteTemplate(w, "dashboard", guiData)
+	check.IfError(err)
 }
 
 func add_table(w http.ResponseWriter, r *http.Request) {

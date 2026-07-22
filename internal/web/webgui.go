@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/aceberg/HomeLists/internal/check"
 	"github.com/aceberg/HomeLists/internal/db"
 	"github.com/aceberg/HomeLists/internal/models"
 )
@@ -29,7 +30,6 @@ func Webgui(appConfig models.Conf) {
 	http.HandleFunc("/", dashboard)
 	http.HandleFunc("/add_table/", add_table)
 	http.HandleFunc("/add_to_watchlist/", add_to_watchlist)
-	http.HandleFunc("/backup/", backup)
 	http.HandleFunc("/config/", config)
 	http.HandleFunc("/dashboard_delete/", dashboard_delete)
 	http.HandleFunc("/dashboard_rename/", dashboard_rename)
@@ -43,10 +43,10 @@ func Webgui(appConfig models.Conf) {
 	http.HandleFunc("/table/", table)
 	http.HandleFunc("/update_line/", update_line)
 	http.HandleFunc("/update_watch/", update_watch)
-	http.HandleFunc("/upload/", upload)
 	http.HandleFunc("/watchlist/", watchlist)
 
 	http.HandleFunc("/api_minus/", api_minus)
 
-	http.ListenAndServe(address, nil)
+	err := http.ListenAndServe(address, nil)
+	check.IfError(err)
 }

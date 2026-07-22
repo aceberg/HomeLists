@@ -3,6 +3,7 @@ package conf
 import (
 	"github.com/spf13/viper"
 
+	"github.com/aceberg/HomeLists/internal/check"
 	"github.com/aceberg/HomeLists/internal/models"
 )
 
@@ -18,7 +19,8 @@ func GetConfig() (config models.Conf) {
 
 	viper.SetConfigFile(configPath)
 	viper.SetConfigType("env")
-	viper.ReadInConfig()
+	err := viper.ReadInConfig()
+	check.IfError(err)
 
 	viper.AutomaticEnv() // Get ENVIRONMENT variables
 
@@ -36,5 +38,6 @@ func WriteConfig(theme string) {
 	viper.SetConfigFile(configPath)
 	viper.SetConfigType("env")
 	viper.Set("THEME", theme)
-	viper.WriteConfig()
+	err := viper.WriteConfig()
+	check.IfError(err)
 }

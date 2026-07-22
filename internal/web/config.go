@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"net/http"
 
+	"github.com/aceberg/HomeLists/internal/check"
 	"github.com/aceberg/HomeLists/internal/conf"
 	"github.com/aceberg/HomeLists/internal/models"
 )
@@ -18,8 +19,10 @@ func config(w http.ResponseWriter, r *http.Request) {
 	guiData.Themes = []string{"cerulean", "cosmo", "cyborg", "darkly", "flatly", "journal", "litera", "lumen", "lux", "materia", "minty", "morph", "pulse", "quartz", "sandstone", "simplex", "sketchy", "slate", "solar", "spacelab", "superhero", "united", "vapor", "yeti", "zephyr"}
 
 	tmpl, _ := template.ParseFS(TemplHTML, "templates/config.html", "templates/header.html", "templates/footer.html")
-	tmpl.ExecuteTemplate(w, "header", guiData)
-	tmpl.ExecuteTemplate(w, "config", guiData)
+	err := tmpl.ExecuteTemplate(w, "header", guiData)
+	check.IfError(err)
+	err = tmpl.ExecuteTemplate(w, "config", guiData)
+	check.IfError(err)
 }
 
 func save_config(w http.ResponseWriter, r *http.Request) {

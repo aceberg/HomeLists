@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/aceberg/HomeLists/internal/check"
 	"github.com/aceberg/HomeLists/internal/db"
 	"github.com/aceberg/HomeLists/internal/models"
 )
@@ -21,14 +22,14 @@ func table(w http.ResponseWriter, r *http.Request) {
 
 	guiData.CurrentTable = tags[2]
 
-	check := false
+	found := false
 	for _, oneTable := range TableList {
 		if oneTable.Name == guiData.CurrentTable {
-			check = true
+			found = true
 		}
 	}
 
-	if check {
+	if found {
 		guiData.ItemList = db.SelectOneTable(AppConfig.DbPath, guiData.CurrentTable)
 
 		sort.SliceStable(guiData.ItemList, func(i, j int) bool {
@@ -43,8 +44,10 @@ func table(w http.ResponseWriter, r *http.Request) {
 		guiData.TableList = TableList
 
 		tmpl, _ := template.ParseFS(TemplHTML, "templates/table.html", "templates/header.html", "templates/footer.html")
-		tmpl.ExecuteTemplate(w, "header", guiData)
-		tmpl.ExecuteTemplate(w, "table", guiData)
+		err := tmpl.ExecuteTemplate(w, "header", guiData)
+		check.IfError(err)
+		err = tmpl.ExecuteTemplate(w, "table", guiData)
+		check.IfError(err)
 	} else {
 		http.Redirect(w, r, "/", http.StatusFound)
 	}

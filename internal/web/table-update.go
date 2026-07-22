@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/aceberg/HomeLists/internal/check"
 	"github.com/aceberg/HomeLists/internal/db"
 	"github.com/aceberg/HomeLists/internal/models"
 )
@@ -52,7 +53,8 @@ func update_line(w http.ResponseWriter, r *http.Request) {
 	minus := r.FormValue("minus")
 
 	if idStr == "" {
-		fmt.Fprintf(w, "No data!")
+		_, err := fmt.Fprintf(w, "No data!")
+		check.IfError(err)
 	} else {
 		id, _ := strconv.Atoi(idStr)
 		count, err := strconv.Atoi(countStr)

@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/aceberg/HomeLists/internal/check"
 	"github.com/aceberg/HomeLists/internal/db"
 	"github.com/aceberg/HomeLists/internal/models"
 )
@@ -20,8 +21,10 @@ func watchlist(w http.ResponseWriter, r *http.Request) {
 	guiData.WatchList = db.SelectWatchList(AppConfig.DbPath)
 
 	tmpl, _ := template.ParseFS(TemplHTML, "templates/watchlist.html", "templates/header.html", "templates/footer.html")
-	tmpl.ExecuteTemplate(w, "header", guiData)
-	tmpl.ExecuteTemplate(w, "watchlist", guiData)
+	err := tmpl.ExecuteTemplate(w, "header", guiData)
+	check.IfError(err)
+	err = tmpl.ExecuteTemplate(w, "watchlist", guiData)
+	check.IfError(err)
 }
 
 func add_to_watchlist(w http.ResponseWriter, r *http.Request) {
