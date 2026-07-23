@@ -21,6 +21,8 @@ func Webgui(appConfig models.Conf) {
 	AppConfig = appConfig
 	TableList = db.SelectTableList(AppConfig.DbPath)
 
+	go renameWatchList()
+
 	address := AppConfig.GuiIP + ":" + AppConfig.GuiPort
 
 	log.Println("=================================== ")

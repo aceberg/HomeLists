@@ -17,3 +17,10 @@ func MinusItem(path string, table string, id int) {
 
 	db_exec(path, sqlStatement)
 }
+
+func GetItemNameByID(path string, table string, id int) string {
+
+	name := db_select_name(path, table, id)
+
+	return name
+}

@@ -1,9 +1,9 @@
 package db
 
 import (
-	"log"
 	"sort"
 
+	"github.com/aceberg/HomeLists/internal/check"
 	"github.com/aceberg/HomeLists/internal/models"
 )
 
@@ -14,9 +14,7 @@ func SelectTableList(path string) []models.Table {
 	for rows.Next() {
 		var oneItem models.Table
 		err := rows.Scan(&oneItem.ID, &oneItem.Name, &oneItem.Date, &oneItem.Lines)
-		if err != nil {
-			log.Fatal("ERROR: SelectTableList: ", err)
-		}
+		check.IfError(err)
 
 		oneItem.Name = unquote_str(oneItem.Name)
 
@@ -37,9 +35,7 @@ func SelectOneTable(path string, tableName string) []models.Item {
 	for rows.Next() {
 		var oneItem models.Item
 		err := rows.Scan(&oneItem.ID, &oneItem.Date, &oneItem.Name, &oneItem.Color, &oneItem.Count, &oneItem.Place, &oneItem.Sort)
-		if err != nil {
-			log.Fatal("ERROR: SelectOneTable: ", err)
-		}
+		check.IfError(err)
 
 		oneItem.Date = unquote_str(oneItem.Date)
 		oneItem.Name = unquote_str(oneItem.Name)
@@ -57,9 +53,7 @@ func SelectWatchList(path string) []models.WatchItem {
 	for rows.Next() {
 		var oneItem models.WatchItem
 		err := rows.Scan(&oneItem.ID, &oneItem.Table, &oneItem.ItemID, &oneItem.Name, &oneItem.ByDate, &oneItem.Date, &oneItem.ByCount, &oneItem.Count)
-		if err != nil {
-			log.Fatal("ERROR: SelectWatchList: ", err)
-		}
+		check.IfError(err)
 
 		oneItem.Table = unquote_str(oneItem.Table)
 		oneItem.Name = unquote_str(oneItem.Name)

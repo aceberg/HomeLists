@@ -2,8 +2,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [1.0.6] - 2026-07-
+## [1.0.6] - 2026-07-23
 ### Changed
+- Updated Watchlist page
 - Upd to `go 1.26.4`
 - Old code fixes (uint16->int)
 

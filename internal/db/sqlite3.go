@@ -3,9 +3,10 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"log"
 
 	_ "modernc.org/sqlite"
+
+	"github.com/aceberg/HomeLists/internal/check"
 )
 
 func db_exec(path string, sqlStatement string) {
@@ -13,9 +14,7 @@ func db_exec(path string, sqlStatement string) {
 	defer db.Close()
 
 	_, err := db.Exec(sqlStatement)
-	if err != nil {
-		log.Fatal("ERROR: db_exec: ", err)
-	}
+	check.IfError(err)
 }
 
 func db_select(path string, table string) *sql.Rows {
@@ -26,9 +25,7 @@ func db_select(path string, table string) *sql.Rows {
 	sqlStatement = fmt.Sprintf(sqlStatement, quote_str(table))
 
 	res, err := db.Query(sqlStatement)
-	if err != nil {
-		log.Fatal("ERROR: db_select: ", err)
-	}
+	check.IfError(err)
 
 	return res
 }
@@ -42,9 +39,21 @@ func db_select_count(path string, table string, id int) int {
 
 	var count int
 	err := db.QueryRow(sqlStatement, id).Scan(&count)
-	if err != nil {
-		log.Fatal("ERROR: db_select_count: ", err)
-	}
+	check.IfError(err)
 
 	return count
+}
+
+func db_select_name(path string, table string, id int) string {
+	db, _ := sql.Open("sqlite", path)
+	defer db.Close()
+
+	sqlStatement := `SELECT "NAME" FROM '%s' WHERE ID = ?;`
+	sqlStatement = fmt.Sprintf(sqlStatement, quote_str(table))
+
+	var name string
+	err := db.QueryRow(sqlStatement, id).Scan(&name)
+	check.IfError(err)
+
+	return name
 }

@@ -37,15 +37,15 @@ func add_to_watchlist(w http.ResponseWriter, r *http.Request) {
 
 	watchList := db.SelectWatchList(AppConfig.DbPath)
 
-	check := true
+	found := false
 	for _, searchItem := range watchList {
 		if searchItem.Table == wItem.Table && searchItem.ItemID == wItem.ItemID {
-			check = false
+			found = true
 			break
 		}
 	}
 
-	if check {
+	if !found {
 		db.InsertWatchItem(AppConfig.DbPath, wItem)
 	}
 
