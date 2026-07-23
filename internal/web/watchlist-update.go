@@ -14,6 +14,7 @@ func update_watch(w http.ResponseWriter, r *http.Request) {
 	idStr := r.FormValue("id")
 	wItem.ID, _ = strconv.Atoi(idStr)
 
+	wItem.Name = r.FormValue("name")
 	wItem.ByDate = r.FormValue("bydate")
 	wItem.Date = r.FormValue("date")
 	wItem.ByCount = r.FormValue("bycount")
