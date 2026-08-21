@@ -47,7 +47,7 @@ func Webgui(appConfig models.Conf) {
 	http.HandleFunc("/update_watch/", update_watch)
 	http.HandleFunc("/watchlist/", watchlist)
 
-	http.HandleFunc("/api_minus/", api_minus)
+	http.HandleFunc("/api/minus", api_minus)
 
 	err := http.ListenAndServe(address, nil)
 	check.IfError(err)

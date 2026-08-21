@@ -17,7 +17,8 @@
                       <input name="color" type="hidden" class="form-control" value="{{ .Color }}">
                       <input name="name" type="text" class="form-control text-dark" value="{{ .Name }}" STYLE="background-color: {{ .Color }}">
                       <input name="date" type="text" style="max-width: 25%; background-color: {{ .Color }}" class="form-control" value="{{ .Date }}">
-                      <button name="minus" value="yes" type="submit" formaction="/update_line/" formmethod="post" class="btn btn-outline-success" >- 1</button>
+                      <button type="button" class="btn btn-outline-success"
+                      onclick='fetch("/api/minus?table={{ $.CurrentTable }}&id={{ .ID }}", {method: "DELETE"}).then(() => location.reload())'>- 1</button>
                       <input name="count" type="number" style="max-width: 15%; background-color: {{ .Color }}" class="form-control text-dark" value="{{ .Count }}">
                       <input name="place" type="hidden" class="form-control" value="{{ .Place }}">
                       <input name="sort" type="hidden" class="form-control" value="{{ .Sort }}">
@@ -45,7 +46,8 @@
                       <input name="color" type="hidden" class="form-control" value="{{ .Color }}">
                       <input name="name" type="text" class="form-control text-dark" value="{{ .Name }}" STYLE="background-color: {{ .Color }}">
                       <input name="date" type="text" style="max-width: 25%; background-color: {{ .Color }}" class="form-control" value="{{ .Date }}">
-                      <button name="minus" value="yes" type="submit" formaction="/update_line/" formmethod="post" class="btn btn-outline-success" >- 1</button>
+                      <button type="button" class="btn btn-outline-success"
+                      onclick='fetch("/api/minus?table={{ $.CurrentTable }}&id={{ .ID }}", {method: "DELETE"}).then(() => location.reload())'>- 1</button>
                       <input name="count" type="number" style="max-width: 15%; background-color: {{ .Color }}" class="form-control text-dark" value="{{ .Count }}">
                       <input name="place" type="hidden" class="form-control" value="{{ .Place }}">
                       <input name="sort" type="hidden" class="form-control" value="{{ .Sort }}">
