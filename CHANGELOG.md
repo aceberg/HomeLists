@@ -2,6 +2,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.0.8] - 2026-09-13
+### Added
+- Allow CORS for `/api/minus`
+
 ## [1.0.7] - 2026-08-21
 ### Added
 - Log every `-1`

@@ -9,7 +9,7 @@
                 <form action="/update_line/" method="post">
                   <div class="input-group">
                       <button type="submit" class="btn btn-primary" hidden></button>
-                      <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" >
+                      <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" title="Edit ID = {{ .ID }}">
                         <i class="bi bi-pencil"></i>
                       </button>
                       <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
@@ -38,7 +38,7 @@
                 <form action="/update_line/" method="post">
                   <div class="input-group">
                       <button type="submit" class="btn btn-primary" hidden></button>
-                      <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" >
+                      <button type="submit" formaction="/edit_line/" formmethod="post" class="btn btn-outline-warning" title="Edit ID = {{ .ID }}">
                         <i class="bi bi-pencil"></i>
                       </button>
                       <input name="cur_table" type="hidden" class="form-control" value="{{ $.CurrentTable }}">
