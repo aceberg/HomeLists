@@ -3,13 +3,19 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"sync"
 
 	_ "modernc.org/sqlite"
 
 	"github.com/aceberg/HomeLists/internal/check"
 )
 
+var mu sync.Mutex
+
 func db_exec(path string, sqlStatement string) {
+	mu.Lock()
+	defer mu.Unlock()
+
 	db, _ := sql.Open("sqlite", path)
 	defer db.Close()
 
@@ -18,6 +24,9 @@ func db_exec(path string, sqlStatement string) {
 }
 
 func db_select(path string, table string) *sql.Rows {
+	mu.Lock()
+	defer mu.Unlock()
+
 	db, _ := sql.Open("sqlite", path)
 	defer db.Close()
 
@@ -31,6 +40,9 @@ func db_select(path string, table string) *sql.Rows {
 }
 
 func db_select_count(path string, table string, id int) int {
+	mu.Lock()
+	defer mu.Unlock()
+
 	db, _ := sql.Open("sqlite", path)
 	defer db.Close()
 
@@ -45,6 +57,9 @@ func db_select_count(path string, table string, id int) int {
 }
 
 func db_select_name(path string, table string, id int) string {
+	mu.Lock()
+	defer mu.Unlock()
+
 	db, _ := sql.Open("sqlite", path)
 	defer db.Close()
 
